@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Census</string>
+    <string name="population_census">Population Census</string>
+    <string name="select_role">Select role…</string>
+    <string name="role">Role</string>
+    <string name="admin">Admin</string>
+    <string name="stationary">Stationary</string>
+    <string name="controller">Controller</string>
+    <string name="citizen">Citizen</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="createAnAccount">Create an account</string>
+    <string name="alreadyHaveAnAccount">Already have an account</string>
+    <string name="select_region">Select Region</string>
+    <string name="token_verification">Token Verification</string>
+    <string name="we_will_send_you_an_one_time_password_on_this_device">We will send you an One Time Password on this device</string>
+    <string name="if_you_are_ready_click_button_in_below">If you are ready click button in below</string>
+    <string name="get_code">Get code</string>
+    <string name="enter_the_code_sent_to">Enter the code sent to</string>
+    <string name="didn_t_receive_the_code">Didn\'t receive the code?</string>
+    <string name="resend_code">RESEND CODE</string>
+    <string name="verify">Verify</string>
+    <string name="_7">+7</string>
+    <string name="_7776666666">7776666666</string>
+
+    <color name="main_color">#FFFFFF</color>
+    <color name="second_main_color">#4CAF50</color>
+    <color name="text_main_color">#FFFFFF</color>
+    <color name="gray">#8C8C8C</color>
+    <color name="blue">#3366CC </color>
+    <color name="mtrl_textinput_default_box_stroke_color">#4CAF50</color>
+
+    <dimen name="marginTop20dp">20dp</dimen>
+    <dimen name="marginBottom20dp">20dp</dimen>
+</resources>

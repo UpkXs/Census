@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_color"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/population_census"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/population_census"
+            android:textColor="@color/second_main_color"
+            android:textSize="30sp"
+            android:fontFamily="@font/poppinsbold"
+            android:layout_marginBottom="@dimen/marginBottom20dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/adminBtn"
+                android:text="@string/admin"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppinsmediumitalic"
+                android:textColor="@color/second_main_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                app:backgroundTint="@null"
+                android:layout_marginBottom="5dp"
+                android:onClick="goToLoginActivity"/>
+
+            <Button
+                android:id="@+id/stationaryBtn"
+                android:text="@string/stationary"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppinsmediumitalic"
+                android:textColor="@color/second_main_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                app:backgroundTint="@null"
+                android:layout_marginBottom="5dp"
+                android:onClick="goToLoginActivity"/>
+
+
+            <Button
+                android:id="@+id/controllerBtn"
+                android:text="@string/controller"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppinsmediumitalic"
+                android:textColor="@color/second_main_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                app:backgroundTint="@null"
+                android:layout_marginBottom="5dp"
+                android:onClick="goToLoginActivity"/>
+
+
+            <Button
+                android:id="@+id/citizenBtn"
+                android:text="@string/citizen"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppinsmediumitalic"
+                android:textColor="@color/second_main_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                app:backgroundTint="@null"
+                android:onClick="goToLoginActivity"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/select_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_role"
+            android:textColor="@color/second_main_color"
+            android:textSize="24sp"
+            android:fontFamily="@font/poppinsregular"
+            android:layout_marginTop="@dimen/marginTop20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
