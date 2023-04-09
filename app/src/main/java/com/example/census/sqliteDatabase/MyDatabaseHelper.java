@@ -1,10 +1,16 @@
 package com.example.census.sqliteDatabase;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.census.model.Citizen;
+import com.example.census.model.CitizenLogin;
+import com.example.census.model.Controller;
+import com.example.census.model.Stationary;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
@@ -99,5 +105,58 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CITIZEN_LOGIN_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + CITIZEN_TABLE_NAME);
         onCreate(db);
+    }
+
+    public long addStationary(Stationary stationary) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(STATIONARY_ID, stationary.getStationary_id());
+        cv.put(STATIONARY_USERNAME, stationary.getStationary_username());
+        cv.put(STATIONARY_PASSWORD, stationary.getStationary_password());
+        cv.put(STATIONARY_APIKEY, stationary.getStationary_apikey());
+        cv.put(STATIONARY_REGION_ID, stationary.getRegion_id());
+
+        return db.insert(STATIONARY_TABLE_NAME, null, cv);
+    }
+
+    public long addController(Controller controller) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CONTROLLER_ID, controller.getController_id());
+        cv.put(CONTROLLER_NAME, controller.getController_name());
+        cv.put(CONTROLLER_USERNAME, controller.getController_username());
+        cv.put(CONTROLLER_PASSWORD, controller.getController_password());
+        cv.put(CONTROLLER_APIKEY, controller.getController_apikey());
+        cv.put(CONTROLLER_REGION_ID, controller.getRegion_id());
+
+        return db.insert(CONTROLLER_TABLE_NAME, null, cv);
+    }
+
+    public long addCitizenLogin(CitizenLogin citizenLogin) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CITIZEN_LOGIN_ID, citizenLogin.getUsername_id());
+        cv.put(CITIZEN_LOGIN_USERNAME, citizenLogin.getUsername());
+        cv.put(CITIZEN_LOGIN_PASSWORD, citizenLogin.getPassword());
+        cv.put(CITIZEN_LOGIN_FINGER_PRINT, citizenLogin.getFinger_print());
+        cv.put(CITIZEN_LOGIN_FACIAL_PRINT, citizenLogin.getFacial_print());
+        cv.put(CITIZEN_LOGIN_APIKEY, citizenLogin.getApi_key());
+
+        return db.insert(CITIZEN_LOGIN_TABLE_NAME, null, cv);
+    }
+
+    public long addCitizen(Citizen citizen) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CITIZEN_TIN, citizen.getCitizen_tin());
+        cv.put(CITIZEN_FULL_NAME, citizen.getCitizen_fullName());
+        cv.put(CITIZEN_USERNAME_ID, citizen.getUsername_id());
+        cv.put(CITIZEN_REGION_ID, citizen.getRegion_id());
+
+        return db.insert(CITIZEN_TABLE_NAME, null, cv);
     }
 }
