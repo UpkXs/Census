@@ -2,35 +2,29 @@ package com.example.census;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.census.database.CRUD;
-import com.example.census.database.Database;
 import com.example.census.database.PasswordToHash;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Region;
 import com.example.census.model.Role;
-import com.google.android.material.textfield.TextInputLayout;
+import com.example.census.sqliteDatabase.MyDatabaseHelper;
 
-import java.io.Serializable;
-import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CitizenRegistrationActivity extends AppCompatActivity {
@@ -39,6 +33,9 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
     private Region region;
     private Citizen citizen;
     private CitizenLogin citizenLogin;
+
+    private MyDatabaseHelper myDB;
+    private List<String> regionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +56,13 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
             TextView createAccount = findViewById(R.id.createAccount);
             createAccount.setPaintFlags(createAccount.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
+            myDB = new MyDatabaseHelper(CitizenRegistrationActivity.this);
+            regionList = new ArrayList<>();
+
+            getRegions(); // select all regions from database( * table name region)
+
             AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
 
-            List<String> regionList = getRegions();
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_item, regionList);
             autoCompleteTextView.setAdapter(adapter);
 
@@ -70,7 +71,7 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String selectedRegion = adapterView.getItemAtPosition(i).toString();
                     region = getRegion(selectedRegion);
-                    Toast.makeText(CitizenRegistrationActivity.this, "Selected region: " + selectedRegion, Toast.LENGTH_LONG).show();
+                    Toast.makeText(CitizenRegistrationActivity.this, "Selected region: " + region.getRegion_name(), Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -86,7 +87,7 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         }
     }
 
-    int rows = 0;
+    long rows = 0;
     public void register(View view, CitizenLogin citizenLogin, Citizen citizen) {
         EditText firstName = findViewById(R.id.inputFirstName);
         EditText lastName = findViewById(R.id.inputLastName);
@@ -98,23 +99,20 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
 
         citizenLogin.setUsername(username.getText().toString());
         citizenLogin.setPassword(hashedPassword);
-
-        rows = insertIntoCitizenLogin(citizenLogin);
-        System.out.println("rows = " + rows);
-        if (rows == 0) {
-            System.out.println("Citizen username already in use!");
+        rows = myDB.addCitizenLogin(citizenLogin); // insert into citizenLogin table new record
+        if (rows == -1) {
             toastShow("Citizen username already in use!");
             return;
         }
-        citizenLogin = selectFromCitizenLogin(citizenLogin.getUsername());
+
+        citizenLogin = getCitizenLogin(citizenLogin.getUsername());
 
         citizen.setCitizen_fullName(firstName.getText() + " " + lastName.getText());
         citizen.setUsername_id(citizenLogin.getUsername_id());
         citizen.setRegion_id(region.getRegion_id());
 
-        rows = insertIntoCitizen(citizen);
-        System.out.println("rows = " + rows);
-        citizen = selectFromCitizen(citizen.getUsername_id());
+        rows = myDB.addCitizen(citizen);
+        citizen = getCitizen(citizen.getUsername_id());
 
         Intent loginActivity = new Intent(this, CitizenLoginActivity.class);
         startActivity(loginActivity);
@@ -125,61 +123,62 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         startActivity(loginActivity);
     }
 
-    public List<String> getRegions() {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-        return crud.selectFromRegion(connection, "select region_name from region order by region_name");
+    void getRegions() {
+        Cursor cursor = myDB.selectFromTable("SELECT * FROM TABLE region");
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                String region = cursor.getString(1);
+                regionList.add(region);
+            }
+        }
     }
 
-    public Region getRegion(String region_name) {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-        return crud.selectRegionIdFromRegion(connection,
-                "select * from region where region_name = '" + region_name + "'");
+    public Region getRegion(String regionName) {
+        Cursor cursor = myDB.selectFromTable("SELECT * FROM TABLE region WHERE region_name = '" + regionName + "'");
+        Region region = new Region();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+        } else {
+            region.setRegion_id(cursor.getInt(0));
+            region.setRegion_name(cursor.getString(1));
+        }
+        return region;
     }
 
-    public int insertIntoCitizenLogin(CitizenLogin citizenLogin) {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-        return crud.insertInto(connection,
-                "insert into citizen_login(username, password, finger_print, facial_print, api_key) " +
-                        "values('" + citizenLogin.getUsername() + "', '" +
-                        citizenLogin.getPassword()     + "', '" +
-                        citizenLogin.getFinger_print() + "', '" +
-                        citizenLogin.getFacial_print() + "', " +
-                        citizenLogin.getApi_key()      + ")");
+    public CitizenLogin getCitizenLogin(String username) {
+        Cursor cursor = myDB.selectFromTable("select * from citizen_login where username = '" + username + "'");
+        CitizenLogin citizenLogin = new CitizenLogin();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                citizenLogin.setUsername_id(cursor.getInt(0));
+                citizenLogin.setUsername(cursor.getString(1));
+                citizenLogin.setPassword(cursor.getString(2));
+                citizenLogin.setFinger_print(cursor.getString(3));
+                citizenLogin.setFacial_print(cursor.getString(4));
+                citizenLogin.setApi_key(cursor.getInt(5));
+            }
+        }
+        return citizenLogin;
     }
 
-    public CitizenLogin selectFromCitizenLogin(String username) {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-        return crud.selectFromCitizenLogin(connection,
-                "select * from citizen_login where username = '" + username + "'");
-    }
-
-    private int insertIntoCitizen(Citizen citizen) {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-        return crud.insertInto(connection,
-                "insert into citizen(citizen_tin, citizen_fullName, username_id, region_id) " +
-                        "values(" + citizen.getCitizen_tin() + ", '" +
-                        citizen.getCitizen_fullName()        + "', " +
-                        citizen.getUsername_id()             + ", " +
-                        citizen.getRegion_id()               + ")"
-        );
-    }
-
-    public Citizen selectFromCitizen(int username_id) {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-        return crud.selectFromCitizen(connection,
-                "select * from citizen where username_id = '" + username_id + "'");
+    public Citizen getCitizen(int username_id) {
+        Cursor cursor = myDB.selectFromTable("select * from citizen where username_id = '" + username_id + "'");
+        Citizen citizen = new Citizen();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                citizen.setCitizen_tin(cursor.getInt(0));
+                citizen.setCitizen_fullName(cursor.getString(1));
+                citizen.setUsername_id(cursor.getInt(2));
+                citizen.setRegion_id(cursor.getInt(3));
+            }
+        }
+        return citizen;
     }
 
     public void toastShow(CharSequence text) {
