@@ -17,6 +17,7 @@ import com.example.census.R;
 import com.example.census.database.PasswordToHash;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Role;
+import com.example.census.page.SelectActivity;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.token.TokenActivity;
 
@@ -79,8 +80,9 @@ public class CitizenLoginActivity extends AppCompatActivity {
         }
 
         if (citizenLogin.getUsername().contentEquals(username.getText()) && citizenLogin.getPassword().equals(hashedPassword)) {
-            Intent tokenActivity = new Intent(this, TokenActivity.class);
-            tokenActivity.putExtra("username", citizenLogin.getUsername());
+//                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
+            Intent tokenActivity = new Intent(this, SelectActivity.class); // todo remove after implement correct token
+//                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
             tokenActivity.putExtra("role", role);
             startActivity(tokenActivity);
         } else {

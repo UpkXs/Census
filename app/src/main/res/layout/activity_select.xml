@@ -7,14 +7,16 @@
     android:overScrollMode="never"
     android:scrollbars="none"
     android:layout_gravity="center"
-    tools:context=".view.ViewInfoAdminActivity">
+    tools:context=".page.SelectActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
@@ -36,65 +38,25 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnRegisterNewStationary"
+                android:id="@+id/btnViewUserData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/register_new_stationary"
+                android:text="@string/view_user_info"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"
                 android:textSize="16sp"
                 app:backgroundTint="@null" />
 
             <Button
-                android:id="@+id/btnRegisterNewController"
+                android:id="@+id/btnChangeDataOrOnlineInterview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/register_new_controller"
-                android:textAllCaps="false"
-                android:textColor="@color/second_main_color"
-                android:textSize="16sp"
-                app:backgroundTint="@null" />
-
-            <Button
-                android:id="@+id/btnDeleteStationary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/btn_bg"
-                android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/delete_stationary"
-                android:textAllCaps="false"
-                android:textColor="@color/second_main_color"
-                android:textSize="16sp"
-                app:backgroundTint="@null" />
-
-            <Button
-                android:id="@+id/btnDeleteController"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/btn_bg"
-                android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/delete_controller"
-                android:textAllCaps="false"
-                android:textColor="@color/second_main_color"
-                android:textSize="16sp"
-                app:backgroundTint="@null" />
-
-            <Button
-                android:id="@+id/btnChangeUserInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/btn_bg"
-                android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/change_user_info"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"
                 android:textSize="16sp"
@@ -106,12 +68,12 @@
             android:id="@+id/btnLogOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="179dp"
             android:fontFamily="@font/poppinsmediumitalic"
             android:text="@string/log_out"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:layout_marginTop="30dp"
             app:backgroundTint="@color/white" />
 
     </LinearLayout>

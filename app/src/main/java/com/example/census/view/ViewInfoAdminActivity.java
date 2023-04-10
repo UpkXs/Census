@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.census.MainActivity;
 import com.example.census.R;
 import com.example.census.model.Role;
 import com.example.census.page.ChangeDataActivity;
@@ -34,6 +35,7 @@ public class ViewInfoAdminActivity extends AppCompatActivity {
         Button btnDeleteStationary = findViewById(R.id.btnDeleteStationary);
         Button btnDeleteController = findViewById(R.id.btnDeleteController);
         Button btnChangeUserInfo = findViewById(R.id.btnChangeUserInfo);
+        Button btnLogOut = findViewById(R.id.btnLogOut);
 
         btnRegisterNewStationary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,21 +54,29 @@ public class ViewInfoAdminActivity extends AppCompatActivity {
         btnDeleteStationary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToDeleteActivity(view, Role.STATIONARY);
+                goToDeleteActivity(view, Role.STATIONARY); // todo
             }
         });
 
         btnDeleteController.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToDeleteActivity(view, Role.CONTROLLER);
+                goToDeleteActivity(view, Role.CONTROLLER); // todo
             }
         });
 
         btnChangeUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToChangeDataActivity(view, Role.CITIZEN);
+                goToChangeDataActivity(view, Role.CITIZEN); // todo
+            }
+        });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainActivity = new Intent(ViewInfoAdminActivity.this, MainActivity.class);
+                startActivity(mainActivity);
             }
         });
     }

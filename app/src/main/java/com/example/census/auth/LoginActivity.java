@@ -19,6 +19,7 @@ import com.example.census.database.PasswordToHash;
 import com.example.census.model.Controller;
 import com.example.census.model.Role;
 import com.example.census.model.Stationary;
+import com.example.census.page.SelectActivity;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.token.TokenActivity;
 import com.example.census.view.ViewInfoAdminActivity;
@@ -97,8 +98,9 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             if (stationary.getStationary_username().equals(username) && stationary.getStationary_password().equals(hashedPassword)) {
-                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo remove after implement token
-                tokenActivity.putExtra("username", username);
+//                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
+                Intent tokenActivity = new Intent(this, SelectActivity.class); // todo remove after implement correct token
+//                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
             } else {
@@ -114,8 +116,9 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             if (controller.getController_username().equals(username) && controller.getController_password().equals(hashedPassword)) {
-                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo remove after implement token
-                tokenActivity.putExtra("username", username);
+//                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
+                Intent tokenActivity = new Intent(this, SelectActivity.class); // todo remove after implement correct token
+//                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
             } else {
