@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -11,6 +12,9 @@ import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Controller;
 import com.example.census.model.Stationary;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
@@ -55,6 +59,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String CITIZEN_REGION_ID   = "region_id";
     //end region Citizen table
 
+    //region Region table
+    private static final String REGION_TABLE_NAME   = "region";
+    private static final String REGION_ID           = "_id";
+    private static final String REGION_NAME         = "region_name";
+
+    private List<String> regionsList = Arrays.asList(
+            "Aktau"      , "Aktobe"   , "Almaty"   , "Arkalyk"  , "Astana"  ,
+            "Taldykorgan", "Taraz"    , "Turkistan", "Oral"     , "Oskemen" ,
+            "Kokshetau"  , "Kostanay" , "Pavlodar" , "Petropavl", "Semey"   ,
+            "Atyrau"     , "Jezkazgan", "Karaganda", "Kyzylorda", "Shymkent"
+    );
+
+    //endregion Region table
+
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -92,10 +110,22 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         String createTableCitizen = "CREATE TABLE " + CITIZEN_TABLE_NAME +
                 " (" + CITIZEN_TIN + " INTEGER, " +
-                CITIZEN_FULL_NAME + " TEXT, " +
-                CITIZEN_USERNAME_ID + " INTEGER, " +
-                CITIZEN_REGION_ID + " INTEGER);";
+                       CITIZEN_FULL_NAME + " TEXT, " +
+                       CITIZEN_USERNAME_ID + " INTEGER, " +
+                       CITIZEN_REGION_ID + " INTEGER);";
         db.execSQL(createTableCitizen);
+
+        String createTableRegion = "CREATE TABLE " + REGION_TABLE_NAME +
+                " (" + REGION_ID + " INTEGER, " +
+                       REGION_NAME + " TEXT);";
+        db.execSQL(createTableRegion);
+
+        for (String region: regionsList) {
+            long result = addRegion(region);
+            if (result == -1) {
+                Toast.makeText(context, "Failed to insert region " + region, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -104,6 +134,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CONTROLLER_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + CITIZEN_LOGIN_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + CITIZEN_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + REGION_TABLE_NAME);
         onCreate(db);
     }
 
@@ -111,7 +142,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(STATIONARY_ID, stationary.getStationary_id());
         cv.put(STATIONARY_USERNAME, stationary.getStationary_username());
         cv.put(STATIONARY_PASSWORD, stationary.getStationary_password());
         cv.put(STATIONARY_APIKEY, stationary.getStationary_apikey());
@@ -124,7 +154,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(CONTROLLER_ID, controller.getController_id());
         cv.put(CONTROLLER_NAME, controller.getController_name());
         cv.put(CONTROLLER_USERNAME, controller.getController_username());
         cv.put(CONTROLLER_PASSWORD, controller.getController_password());
@@ -138,7 +167,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(CITIZEN_LOGIN_ID, citizenLogin.getUsername_id());
         cv.put(CITIZEN_LOGIN_USERNAME, citizenLogin.getUsername());
         cv.put(CITIZEN_LOGIN_PASSWORD, citizenLogin.getPassword());
         cv.put(CITIZEN_LOGIN_FINGER_PRINT, citizenLogin.getFinger_print());
@@ -158,5 +186,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(CITIZEN_REGION_ID, citizen.getRegion_id());
 
         return db.insert(CITIZEN_TABLE_NAME, null, cv);
+    }
+
+    private long addRegion(String region) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(REGION_NAME, region);
+
+        return db.insert(REGION_TABLE_NAME, null, cv);
     }
 }
