@@ -2,6 +2,7 @@ package com.example.census.sqliteDatabase;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -195,5 +196,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(REGION_NAME, region);
 
         return db.insert(REGION_TABLE_NAME, null, cv);
+    }
+
+    public Cursor selectFromTable(String sql) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(sql, null);
+        }
+        return cursor;
     }
 }
