@@ -124,9 +124,9 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
     }
 
     void getRegions() {
-        Cursor cursor = myDB.selectFromTable("SELECT * FROM TABLE region");
+        Cursor cursor = myDB.selectFromTable("SELECT * FROM region");
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            regionList = new ArrayList<>();
         } else {
             while (cursor.moveToNext()) {
                 String region = cursor.getString(1);
@@ -136,13 +136,17 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
     }
 
     public Region getRegion(String regionName) {
-        Cursor cursor = myDB.selectFromTable("SELECT * FROM TABLE region WHERE region_name = '" + regionName + "'");
+        Cursor cursor = myDB.selectFromTable("SELECT * FROM region WHERE region_name = '" + regionName + "'");
         Region region = new Region();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            return region;
         } else {
-            region.setRegion_id(cursor.getInt(0));
-            region.setRegion_name(cursor.getString(1));
+            while (cursor.moveToNext()) {
+                System.out.println("region == " + cursor.getColumnName(0));
+                System.out.println("region == " + cursor.getColumnName(1));
+                region.setRegion_id(cursor.getInt(0));
+                region.setRegion_name(cursor.getString(1));
+            }
         }
         return region;
     }
@@ -151,7 +155,7 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         Cursor cursor = myDB.selectFromTable("select * from citizen_login where username = '" + username + "'");
         CitizenLogin citizenLogin = new CitizenLogin();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            return citizenLogin;
         } else {
             while (cursor.moveToNext()) {
                 citizenLogin.setUsername_id(cursor.getInt(0));
@@ -169,7 +173,7 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         Cursor cursor = myDB.selectFromTable("select * from citizen where username_id = '" + username_id + "'");
         Citizen citizen = new Citizen();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            return citizen;
         } else {
             while (cursor.moveToNext()) {
                 citizen.setCitizen_tin(cursor.getInt(0));

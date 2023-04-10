@@ -99,7 +99,7 @@ public class CitizenLoginActivity extends AppCompatActivity {
         Cursor cursor = myDB.selectFromTable("select * from citizen_login where username = '" + username + "'");
         CitizenLogin citizenLogin = new CitizenLogin();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            return citizenLogin;
         } else {
             while (cursor.moveToNext()) {
                 citizenLogin.setUsername_id(cursor.getInt(0));

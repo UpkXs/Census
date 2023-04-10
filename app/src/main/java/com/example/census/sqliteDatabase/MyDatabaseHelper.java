@@ -121,8 +121,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                        REGION_NAME + " TEXT);";
         db.execSQL(createTableRegion);
 
+
         for (String region: regionsList) {
-            long result = addRegion(region);
+            long result = addRegion(region, db);
             if (result == -1) {
                 Toast.makeText(context, "Failed to insert region " + region, Toast.LENGTH_SHORT).show();
             }
@@ -189,8 +190,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return db.insert(CITIZEN_TABLE_NAME, null, cv);
     }
 
-    private long addRegion(String region) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    private long addRegion(String region, SQLiteDatabase db) {
         ContentValues cv = new ContentValues();
 
         cv.put(REGION_NAME, region);
