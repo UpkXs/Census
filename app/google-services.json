@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "35093581458",
-    "project_id": "census-26afc",
-    "storage_bucket": "census-26afc.appspot.com"
+    "project_number": "750221538757",
+    "project_id": "census-90253",
+    "storage_bucket": "census-90253.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:35093581458:android:683ccf2851001b8f9aa04b",
+        "mobilesdk_app_id": "1:750221538757:android:e28f98697a29e4bc9887ac",
         "android_client_info": {
           "package_name": "com.example.census"
         }
       },
       "oauth_client": [
         {
-          "client_id": "35093581458-8t1ll3q44781adk48soctfrc31oqg04o.apps.googleusercontent.com",
+          "client_id": "750221538757-cqo9rv1bafi6c2kpdq36rrmh4ac135sc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.census",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "35093581458-mtlcb1dnmjtu0vtgpbhbfd5c5edklc8v.apps.googleusercontent.com",
+          "client_id": "750221538757-k8e4l4gkgvg6i9njs7gbhlbu29cibhq2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCUSLE0t0cD6DnA7qpXC49xZ8A11wYNNgI"
+          "current_key": "AIzaSyDV-FkS-s2tZ_0HquEbGyluG-xJqB5jHzw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "35093581458-mtlcb1dnmjtu0vtgpbhbfd5c5edklc8v.apps.googleusercontent.com",
+              "client_id": "750221538757-k8e4l4gkgvg6i9njs7gbhlbu29cibhq2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
