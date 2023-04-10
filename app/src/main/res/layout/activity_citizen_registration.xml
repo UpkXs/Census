@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/main_color"
-    tools:context=".CitizenRegistrationActivity">
+    tools:context=".auth.CitizenRegistrationActivity">
 
     <TextView
         android:id="@+id/roleId"

@@ -1,4 +1,4 @@
-package com.example.census;
+package com.example.census.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.census.R;
 import com.example.census.database.PasswordToHash;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;

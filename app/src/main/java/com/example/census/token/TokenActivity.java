@@ -1,4 +1,4 @@
-package com.example.census;
+package com.example.census.token;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.census.R;
 import com.example.census.model.Role;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;

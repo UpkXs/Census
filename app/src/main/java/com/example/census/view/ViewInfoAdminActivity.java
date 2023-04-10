@@ -1,8 +1,10 @@
-package com.example.census;
+package com.example.census.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.census.R;
 
 public class ViewInfoAdminActivity extends AppCompatActivity {
 
