@@ -16,6 +16,7 @@ import com.example.census.R;
 import com.example.census.database.CRUD;
 import com.example.census.database.Database;
 import com.example.census.database.PasswordToHash;
+import com.example.census.fingerTouch.FingerTouchActivity;
 import com.example.census.model.Controller;
 import com.example.census.model.Role;
 import com.example.census.model.Stationary;
@@ -81,7 +82,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (role.label.equals(Role.ADMIN.label)) {
             if (checkIsAdmin(username, password)) {
-                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo remove after implement token
+//                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo undo comment after implement token
+                Intent tokenActivity = new Intent(this, FingerTouchActivity.class); //todo remove after implement token
                 tokenActivity.putExtra("username", username);
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
@@ -99,7 +101,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if (stationary.getStationary_username().equals(username) && stationary.getStationary_password().equals(hashedPassword)) {
 //                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
-                Intent tokenActivity = new Intent(this, SelectActivity.class); // todo remove after implement correct token
+//                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo undo comment after implement token
+                Intent tokenActivity = new Intent(this, FingerTouchActivity.class); //todo remove after implement token
 //                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
@@ -117,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if (controller.getController_username().equals(username) && controller.getController_password().equals(hashedPassword)) {
 //                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
-                Intent tokenActivity = new Intent(this, SelectActivity.class); // todo remove after implement correct token
+//                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo undo comment after implement token
+                Intent tokenActivity = new Intent(this, FingerTouchActivity.class); //todo remove after implement token
 //                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);

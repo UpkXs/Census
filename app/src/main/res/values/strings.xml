@@ -34,6 +34,8 @@
     <string name="change_user_info">Change User Info</string>
     <string name="log_out">Log Out</string>
     <string name="view_user_info">View User Info</string>
+    <string name="use_your_fingerprint_to_continue">Use your finger print to continue</string>
+    <string name="verifyFinger">Verify</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>
