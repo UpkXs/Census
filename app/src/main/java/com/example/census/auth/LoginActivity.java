@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import com.example.census.database.PasswordToHash;
 import com.example.census.model.Controller;
 import com.example.census.model.Role;
 import com.example.census.model.Stationary;
+import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.token.TokenActivity;
 import com.example.census.view.ViewInfoAdminActivity;
 
@@ -29,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private String hashedPassword;
     private Role role;
+
+    private MyDatabaseHelper myDB;
 
     private boolean isToken = false;
 
@@ -46,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.roleId);
         textView.setText(loginPage);
+
+        myDB = new MyDatabaseHelper(LoginActivity.this);
 
         Button loginBtn = findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 toastShow("Admin does not found!");
             }
         } else if (role.label.equals(Role.STATIONARY.label)) {
-            Stationary stationary = selectFromStationary(username);
+            Stationary stationary = getStationary(username);
             if (stationary.getStationary_username() == null) {
                 System.out.println("isNull!");
                 toastShow("Stationary does not found!");
@@ -100,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                 toastShow("Stationary does not found!");
             }
         } else if (role.label.equals(Role.CONTROLLER.label)) {
-            Controller controller = selectFromController(username);
+            Controller controller = getController(username);
             if (controller.getController_username() == null) {
                 System.out.println("isNull!");
                 toastShow("Controller does not found!");
@@ -123,22 +129,39 @@ public class LoginActivity extends AppCompatActivity {
         return username.equals("admin") && password.equals("admin123");
     }
 
-    private Stationary selectFromStationary(String username) {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-
-        return crud.selectFromStationary(connection, "select * from stationary " +
-                "where stationary_username = '" + username + "'");
+    public Stationary getStationary(String username) {
+        Cursor cursor = myDB.selectFromTable("select * from stationary where stationary_username = '" + username + "'");
+        Stationary stationary = new Stationary();
+        if (cursor.getCount() == 0) {
+            return stationary;
+        } else {
+            while (cursor.moveToNext()) {
+                stationary.setStationary_id(cursor.getInt(0));
+                stationary.setStationary_username(cursor.getString(1));
+                stationary.setStationary_password(cursor.getString(2));
+                stationary.setStationary_apikey(cursor.getInt(3));
+                stationary.setRegion_id(cursor.getInt(4));
+            }
+        }
+        return stationary;
     }
 
-    private Controller selectFromController(String username) {
-        Database db = new Database();
-        Connection connection = db.connect();
-        CRUD crud = new CRUD();
-
-        return crud.selectFromController(connection, "select * from controller " +
-                "where controller_username = '" + username + "'");
+    public Controller getController(String username) {
+        Cursor cursor = myDB.selectFromTable("select * from controller where controller_username = '" + username + "'");
+        Controller controller = new Controller();
+        if (cursor.getCount() == 0) {
+            return controller;
+        } else {
+            while (cursor.moveToNext()) {
+                controller.setController_id(cursor.getInt(0));
+                controller.setController_name(cursor.getString(1));
+                controller.setController_username(cursor.getString(2));
+                controller.setController_password(cursor.getString(3));
+                controller.setController_apikey(cursor.getInt(4));
+                controller.setRegion_id(cursor.getInt(5));
+            }
+        }
+        return controller;
     }
 
     public void toastShow(CharSequence text) {

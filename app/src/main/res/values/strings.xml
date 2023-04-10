@@ -26,6 +26,12 @@
     <string name="verify">Verify</string>
     <string name="_7">+7</string>
     <string name="_7776666666">7776666666</string>
+    <string name="register_new_stationary">Register new Stationary</string>
+    <string name="what_action_you_want_to_do">What action you want to do?</string>
+    <string name="register_new_controller">Register new Controller</string>
+    <string name="delete_stationary">Delete Stationary</string>
+    <string name="delete_controller">Delete Controller</string>
+    <string name="change_user_info">Change User Info</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

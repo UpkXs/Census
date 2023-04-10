@@ -66,10 +66,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String REGION_NAME         = "region_name";
 
     private List<String> regionsList = Arrays.asList(
-            "Aktau"      , "Aktobe"   , "Almaty"   , "Arkalyk"  , "Astana"  ,
+            "Aktau"      , "Aktobe"   , "Almaty"   , "Atyrau"  , "Astana"  ,
             "Taldykorgan", "Taraz"    , "Turkistan", "Oral"     , "Oskemen" ,
             "Kokshetau"  , "Kostanay" , "Pavlodar" , "Petropavl", "Semey"   ,
-            "Atyrau"     , "Jezkazgan", "Karaganda", "Kyzylorda", "Shymkent"
+            "Jezkazgan"  , "Karaganda", "Kyzylorda", "Shymkent"
     );
 
     //endregion Region table
