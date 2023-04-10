@@ -19,6 +19,7 @@ import com.example.census.model.Controller;
 import com.example.census.model.Role;
 import com.example.census.model.Stationary;
 import com.example.census.token.TokenActivity;
+import com.example.census.view.ViewInfoAdminActivity;
 
 import java.sql.Connection;
 
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private String hashedPassword;
     private Role role;
+
+    private boolean isToken = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +70,11 @@ public class LoginActivity extends AppCompatActivity {
         hashedPassword = passwordToHash.doHash(password);
         System.out.println("hashedPassword = " + hashedPassword);
 
-        Intent tokenActivity = new Intent(this, TokenActivity.class);
+//        Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
 
         if (role.label.equals(Role.ADMIN.label)) {
             if (checkIsAdmin(username, password)) {
+                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo remove after implement token
                 tokenActivity.putExtra("username", username);
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
@@ -87,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             if (stationary.getStationary_username().equals(username) && stationary.getStationary_password().equals(hashedPassword)) {
+                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo remove after implement token
                 tokenActivity.putExtra("username", username);
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
@@ -103,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             if (controller.getController_username().equals(username) && controller.getController_password().equals(hashedPassword)) {
+                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo remove after implement token
                 tokenActivity.putExtra("username", username);
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
