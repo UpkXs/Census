@@ -80,9 +80,8 @@ public class CitizenLoginActivity extends AppCompatActivity {
         }
 
         if (citizenLogin.getUsername().contentEquals(username.getText()) && citizenLogin.getPassword().equals(hashedPassword)) {
-//                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
-            Intent tokenActivity = new Intent(this, SelectActivity.class); // todo remove after implement correct token
-//                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
+            Intent tokenActivity = new Intent(this, TokenActivity.class);
+            tokenActivity.putExtra("username", username.getText().toString());
             tokenActivity.putExtra("role", role);
             startActivity(tokenActivity);
         } else {

@@ -1,45 +1,51 @@
 package com.example.census.token;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.census.R;
+import com.example.census.model.Role;
 import com.example.census.view.ViewInfoAdminActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class VerifyTokenActivity extends AppCompatActivity {
 
+    private Role     role;
+    private String   mobile;
+    private int      code;
     private EditText inputCode1, inputCode2, inputCode3, inputCode4, inputCode5, inputCode6;
-    private String verificationId;
+    private Button btnVerify;
+
+    NotificationManagerCompat notificationManagerCompat;
+    Notification              notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_token);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            role = (Role) extras.get("role");
+            mobile = (String) extras.get("mobile");
+            code = (int) extras.get("code");
+        }
+
         TextView textMobile = findViewById(R.id.textMobile);
-        textMobile.setText(String.format(
-                "+7%s", getIntent().getStringExtra("mobile")
-        ));
+        textMobile.setText(String.format("+7%s", mobile));
 
         inputCode1 = findViewById(R.id.inputCode1);
         inputCode2 = findViewById(R.id.inputCode2);
@@ -50,10 +56,7 @@ public class VerifyTokenActivity extends AppCompatActivity {
 
         setupCodeInputs();
 
-        final ProgressBar progressBar = findViewById(R.id.progressBar);
-        final Button btnVerify = findViewById(R.id.btnVerify);
-
-        verificationId = getIntent().getStringExtra("verificationId");
+        btnVerify = findViewById(R.id.btnVerify);
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,67 +70,49 @@ public class VerifyTokenActivity extends AppCompatActivity {
                     Toast.makeText(VerifyTokenActivity.this, "Please enter valid code", Toast.LENGTH_LONG).show();
                     return;
                 }
-                String code = inputCode1.getText().toString() +
+                String inputCode = inputCode1.getText().toString() +
                         inputCode2.getText().toString() +
                         inputCode3.getText().toString() +
                         inputCode4.getText().toString() +
                         inputCode5.getText().toString() +
                         inputCode6.getText().toString();
 
-                if (verificationId != null) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    btnVerify.setVisibility(View.INVISIBLE);
-                    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(
-                            verificationId,
-                            code
-                    );
-
-
-                    FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    progressBar.setVisibility(View.GONE);
-                                    btnVerify.setVisibility(View.VISIBLE);
-
-                                    if (task.isSuccessful()) {
-                                        Intent viewInfoAdminActivity = new Intent(getApplicationContext(), ViewInfoAdminActivity.class);
-                                        viewInfoAdminActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(viewInfoAdminActivity);
-                                    } else {
-                                        Toast.makeText(VerifyTokenActivity.this, "The verification code entered was invalid", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                System.out.println(String.valueOf(code));
+                System.out.println(code);
+                System.out.println(inputCode);
+                System.out.println(String.valueOf(code).equals(inputCode));
+                if (String.valueOf(code).equals(inputCode)) { //todo add check role and view pages
+                    Intent viewInfoAdminActivity = new Intent(getApplicationContext(), ViewInfoAdminActivity.class);
+                    startActivity(viewInfoAdminActivity);
+                } else {
+                    Toast.makeText(VerifyTokenActivity.this, "The verification code entered was invalid", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
         findViewById(R.id.textResendCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        "+7" + getIntent().getStringExtra("mobile"),
-                        60,
-                        TimeUnit.SECONDS,
-                        VerifyTokenActivity.this,
-                        new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
-                            @Override
-                            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
 
-                            }
+                    NotificationManager manager = getSystemService(NotificationManager.class);
+                    manager.createNotificationChannel(channel);
+                }
 
-                            @Override
-                            public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerifyTokenActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
+                code = ThreadLocalRandom.current().nextInt(100000, 1000000);
 
-                            @Override
-                            public void onCodeSent(@NonNull String newVerificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                                verificationId = newVerificationId;
-                                Toast.makeText(VerifyTokenActivity.this, "Code send", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                );
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(VerifyTokenActivity.this, "myCh")
+                        .setSmallIcon(android.R.drawable.stat_notify_sync)
+                        .setContentTitle("Verification code: ")
+                        .setContentText(String.valueOf(code));
+
+                notification = builder.build();
+
+                notificationManagerCompat = NotificationManagerCompat.from(VerifyTokenActivity.this);
+
+                System.out.println("code === " + code);
+                notificationManagerCompat.notify(1, notification);
             }
         });
     }

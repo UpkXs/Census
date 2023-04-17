@@ -1,39 +1,36 @@
 package com.example.census.token;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.example.census.R;
 import com.example.census.model.Role;
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class TokenActivity extends AppCompatActivity {
 
-    private Role role;
-    private String username;
-    private EditText edToken;
+    private Role     role;
+    private String   username;
+    private int      code;
+    private EditText inputMobile;
+    private Button   btnGetToken;
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-    private PhoneAuthProvider.ForceResendingToken token;
-
-    private FirebaseAuth firebaseAuth;
+    NotificationManagerCompat notificationManagerCompat;
+    Notification              notification;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token);
 
@@ -43,64 +40,48 @@ public class TokenActivity extends AppCompatActivity {
             role = (Role) extras.get("role");
         }
 
-        final EditText inputMobile = findViewById(R.id.inputMobile);
-        Button btnGetToken = findViewById(R.id.btnGetToken);
+        inputMobile = findViewById(R.id.inputMobile);
+        btnGetToken = findViewById(R.id.btnGetToken);
 
-        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
-        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                progressBar.setVisibility(View.GONE);
-                btnGetToken.setVisibility(View.VISIBLE);
+        code = ThreadLocalRandom.current().nextInt(100000, 1000000);
 
-            }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "myCh")
+                .setSmallIcon(android.R.drawable.stat_notify_sync)
+                .setContentTitle("Verification code: ")
+                .setContentText(String.valueOf(code));
 
-            @Override
-            public void onVerificationFailed(@NonNull FirebaseException e) {
-                progressBar.setVisibility(View.GONE);
-                btnGetToken.setVisibility(View.VISIBLE);
-                Toast.makeText(TokenActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
+        notification = builder.build();
 
-            @Override
-            public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                progressBar.setVisibility(View.GONE);
-                btnGetToken.setVisibility(View.VISIBLE);
-
-                token = forceResendingToken;
-
-                Intent verifyTokenActivity = new Intent(getApplicationContext(), VerifyTokenActivity.class);
-                verifyTokenActivity.putExtra("mobile", inputMobile.getText().toString());
-                verifyTokenActivity.putExtra("verificationId", verificationId);
-                startActivity(verifyTokenActivity);
-            }
-        };
+        notificationManagerCompat = NotificationManagerCompat.from(this);
 
         btnGetToken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "+7" + inputMobile.getText().toString().trim();
-                if(phoneNumber.equals("+7") || phoneNumber.length() < 12) {
-                    Toast.makeText(TokenActivity.this, "Enter Mobile", Toast.LENGTH_LONG).show();
+                if (inputMobile.getText().length() < 10) {
+                    Toast.makeText(getApplicationContext(), "Enter correct phone number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                progressBar.setVisibility(View.VISIBLE);
-                btnGetToken.setVisibility(View.INVISIBLE);
-
-                System.out.println("phone number :: == " + phoneNumber);
-                PhoneAuthOptions options =
-                        PhoneAuthOptions.newBuilder(firebaseAuth)
-                                .setPhoneNumber(phoneNumber)
-                                .setTimeout(1L, TimeUnit.SECONDS)
-                                .setActivity(TokenActivity.this)
-                                .setCallbacks(mCallbacks)
-                                .setForceResendingToken(token)
-                                .build();
-                PhoneAuthProvider.verifyPhoneNumber(options);
+                System.out.println("code === " + code);
+                push(view);
             }
         });
+
+    }
+
+    public void push(View view) {
+        notificationManagerCompat.notify(1, notification);
+
+        Intent verifyTokenActivity = new Intent(getApplicationContext(), VerifyTokenActivity.class);
+        verifyTokenActivity.putExtra("role", role);
+        verifyTokenActivity.putExtra("mobile", inputMobile.getText().toString());
+        verifyTokenActivity.putExtra("code", code);
+        startActivity(verifyTokenActivity);
     }
 }

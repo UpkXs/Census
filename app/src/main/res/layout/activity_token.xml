@@ -78,6 +78,7 @@
                 android:layout_marginStart="4dp"
                 android:background="@null"
                 android:hint="@string/_7776666666"
+                android:maxLength="10"
                 android:imeOptions="actionDone"
                 android:importantForAutofill="no"
                 android:inputType="number"
@@ -96,28 +97,14 @@
             android:background="@color/gray" />
 
 
-
-        <FrameLayout
+        <Button
+            android:id="@+id/btnGetToken"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnGetToken"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:text="@string/get_code"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppinsbold" />
-            
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-        </FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:text="@string/get_code"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppinsbold" />
 
     </LinearLayout>
 
