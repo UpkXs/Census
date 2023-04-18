@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.census.R;
 import com.example.census.model.Role;
 import com.example.census.token.TokenActivity;
+import com.example.census.view.ViewInfoAdminActivity;
 
 import java.util.concurrent.Executor;
 
@@ -86,6 +87,9 @@ public class FingerTouchActivity extends AppCompatActivity {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(), "Verify Success", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(FingerTouchActivity.this, ViewInfoAdminActivity.class); //todo change to view page citizen
+                startActivity(intent);
             }
 
             @Override
