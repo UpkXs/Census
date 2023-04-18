@@ -94,13 +94,13 @@ public class VerifyTokenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_HIGH);
 
                     NotificationManager manager = getSystemService(NotificationManager.class);
                     manager.createNotificationChannel(channel);
                 }
 
-                code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+                code = ThreadLocalRandom.current().nextInt(100000, 1000000); // get code(6 digit code)
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(VerifyTokenActivity.this, "myCh")
                         .setSmallIcon(android.R.drawable.stat_notify_sync)
