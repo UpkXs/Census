@@ -18,8 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.census.R;
+import com.example.census.biometricAuth.FaceIDActivity;
 import com.example.census.database.PasswordToHash;
-import com.example.census.fingerTouch.FingerTouchActivity;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Region;
@@ -116,10 +116,10 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         rows = myDB.addCitizen(citizen);
         citizen = getCitizen(citizen.getUsername_id());
 
-        Intent fingerTouchActivity = new Intent(this, FingerTouchActivity.class);
-        fingerTouchActivity.putExtra("role", role);
-        fingerTouchActivity.putExtra("username", citizenLogin.getUsername());
-        startActivity(fingerTouchActivity);
+        Intent faceIDActivity = new Intent(this, FaceIDActivity.class);
+        faceIDActivity.putExtra("role", role);
+        faceIDActivity.putExtra("username", citizenLogin.getUsername());
+        startActivity(faceIDActivity);
     }
 
     public void goToLoginActivity(View v) {

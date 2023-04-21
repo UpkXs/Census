@@ -1,4 +1,4 @@
-package com.example.census.fingerTouch;
+package com.example.census.biometricAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +49,7 @@ public class FingerTouchActivity extends AppCompatActivity {
             case BiometricManager.BIOMETRIC_SUCCESS:
                 msg_txt.setText("You can use the fingerprint sensor to login");
                 msg_txt.setTextColor(Color.parseColor("#fafafa"));
+                System.out.println("asdfgh :: You can use the fingerprint sensor to login");
                 break;
             case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
                 msg_txt.setText("the device don't have a fingerprint sensor");
@@ -56,6 +57,7 @@ public class FingerTouchActivity extends AppCompatActivity {
 
                 toastShow("The device don't have a fingerprint sensor. \n" +
                         "Now starts verification with token");
+                System.out.println("qwerty :: The device don't have a fingerprint sensor. Now starts verification with token");
                 startActivity(tokenActivity);
                 break;
             case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
@@ -64,6 +66,7 @@ public class FingerTouchActivity extends AppCompatActivity {
 
                 toastShow("The biometric sensors is currently unavailable. \n" +
                         "Now starts verification with token");
+                System.out.println("zxcvbn :: The biometric sensors is currently unavailable. Now starts verification with token");
                 startActivity(tokenActivity);
                 break;
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
@@ -72,6 +75,7 @@ public class FingerTouchActivity extends AppCompatActivity {
 
                 toastShow("Your device don't have any fingerprint saved, please check your security settings. \n" +
                         "Now starts verification with token");
+                System.out.println("mnbvcx :: Your device don't have any fingerprint saved, please check your security settings. Now starts verification with token");
                 startActivity(tokenActivity);
                 break;
         }
@@ -88,7 +92,7 @@ public class FingerTouchActivity extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(), "Verify Success", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(FingerTouchActivity.this, ViewInfoAdminActivity.class); //todo change to view page citizen
+                Intent intent = new Intent(FingerTouchActivity.this, ViewInfoAdminActivity.class); // todo change to view page citizen
                 startActivity(intent);
             }
 
@@ -98,18 +102,26 @@ public class FingerTouchActivity extends AppCompatActivity {
             }
         });
 
-        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Finger Touch")
-                .setDescription("Use your fingerprint to pass verification")
-                .setNegativeButtonText("Cancel")
-                .build();
+        try {
+            BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Finger Touch")
+                    .setDescription("Use your fingerprint to pass verification")
+                    .build();
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                biometricPrompt.authenticate(promptInfo);
-            }
-        });
+            login_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    biometricPrompt.authenticate(promptInfo);
+                }
+            });
+        } catch (Exception e) {
+            System.out.println("ds3iw1f :: error : " + e.getMessage());
+            toastShow("The biometric sensors is currently unavailable. \n" +
+                    "Now starts verification with token");
+            startActivity(tokenActivity);
+        }
+
+
     }
 
     public void toastShow(CharSequence text) {

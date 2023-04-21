@@ -13,19 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.census.R;
-import com.example.census.database.CRUD;
-import com.example.census.database.Database;
 import com.example.census.database.PasswordToHash;
-import com.example.census.fingerTouch.FingerTouchActivity;
 import com.example.census.model.Controller;
 import com.example.census.model.Role;
 import com.example.census.model.Stationary;
-import com.example.census.page.SelectActivity;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.token.TokenActivity;
 import com.example.census.view.ViewInfoAdminActivity;
-
-import java.sql.Connection;
 
 public class LoginActivity extends AppCompatActivity {
 
