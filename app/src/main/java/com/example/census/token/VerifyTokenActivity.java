@@ -19,15 +19,19 @@ import android.widget.Toast;
 import com.example.census.R;
 import com.example.census.model.Role;
 import com.example.census.view.ViewInfoAdminActivity;
+import com.example.census.view.ViewInfoControllerActivity;
+import com.example.census.view.ViewInfoStationaryActivity;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class VerifyTokenActivity extends AppCompatActivity {
 
     private Role     role;
+    private String   username;
     private String   mobile;
     private int      code;
     private EditText inputCode1, inputCode2, inputCode3, inputCode4, inputCode5, inputCode6;
-    private Button btnVerify;
+    private Button   btnVerify;
 
     NotificationManagerCompat notificationManagerCompat;
     Notification              notification;
@@ -39,9 +43,10 @@ public class VerifyTokenActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            role = (Role) extras.get("role");
-            mobile = (String) extras.get("mobile");
-            code = (int) extras.get("code");
+            role     = (Role) extras.get("role");
+            username = (String) extras.get("username");
+            mobile   = (String) extras.get("mobile");
+            code     = (int) extras.get("code");
         }
 
         TextView textMobile = findViewById(R.id.textMobile);
@@ -82,8 +87,18 @@ public class VerifyTokenActivity extends AppCompatActivity {
                 System.out.println(inputCode);
                 System.out.println(String.valueOf(code).equals(inputCode));
                 if (String.valueOf(code).equals(inputCode)) { //todo add check role and view pages
-                    Intent viewInfoAdminActivity = new Intent(getApplicationContext(), ViewInfoAdminActivity.class);
-                    startActivity(viewInfoAdminActivity);
+                    if (role.label.equals(Role.ADMIN.label)) {
+                        Intent viewInfoAdminActivity = new Intent(getApplicationContext(), ViewInfoAdminActivity.class);
+                        startActivity(viewInfoAdminActivity);
+                    } else if (role.label.equals(Role.STATIONARY.label)) {
+                        Intent viewInfoStationaryActivity = new Intent(getApplicationContext(), ViewInfoStationaryActivity.class);
+                        viewInfoStationaryActivity.putExtra("role", role);
+                        viewInfoStationaryActivity.putExtra("username", username);
+                    } else if (role.label.equals(Role.CONTROLLER.label)) {
+                        Intent viewInfoControllerActivity = new Intent(getApplicationContext(), ViewInfoControllerActivity.class);
+                        viewInfoControllerActivity.putExtra("role", role);
+                        viewInfoControllerActivity.putExtra("username", username);
+                    } //todo add view page to CITIZEN
                 } else {
                     Toast.makeText(VerifyTokenActivity.this, "The verification code entered was invalid", Toast.LENGTH_SHORT).show();
                 }

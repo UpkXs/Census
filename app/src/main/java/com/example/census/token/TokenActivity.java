@@ -80,6 +80,7 @@ public class TokenActivity extends AppCompatActivity {
 
         Intent verifyTokenActivity = new Intent(getApplicationContext(), VerifyTokenActivity.class);
         verifyTokenActivity.putExtra("role", role);
+        verifyTokenActivity.putExtra("username", username);
         verifyTokenActivity.putExtra("mobile", inputMobile.getText().toString());
         verifyTokenActivity.putExtra("code", code);
         startActivity(verifyTokenActivity);

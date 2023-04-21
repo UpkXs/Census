@@ -78,14 +78,13 @@ public class LoginActivity extends AppCompatActivity {
         hashedPassword = passwordToHash.doHash(password);
         System.out.println("hashedPassword = " + hashedPassword);
 
-//        Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
+        Intent tokenActivity = new Intent(this, TokenActivity.class);
 
         if (role.label.equals(Role.ADMIN.label)) {
             if (checkIsAdmin(username, password)) {
-//                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo undo comment after implement token
-                Intent tokenActivity = new Intent(this, FingerTouchActivity.class); //todo remove after implement token
-                tokenActivity.putExtra("username", username);
-                tokenActivity.putExtra("role", role);
+                Intent viewInfoAdminActivity = new Intent(this, ViewInfoAdminActivity.class);
+                viewInfoAdminActivity.putExtra("username", username);
+                viewInfoAdminActivity.putExtra("role", role);
                 startActivity(tokenActivity);
             } else {
                 System.out.println("isNull!");
@@ -100,10 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             if (stationary.getStationary_username().equals(username) && stationary.getStationary_password().equals(hashedPassword)) {
-//                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
-//                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo undo comment after implement token
-                Intent tokenActivity = new Intent(this, FingerTouchActivity.class); //todo remove after implement token
-//                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
+                tokenActivity.putExtra("username", username);
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
             } else {
@@ -119,10 +115,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             if (controller.getController_username().equals(username) && controller.getController_password().equals(hashedPassword)) {
-//                Intent tokenActivity = new Intent(this, TokenActivity.class); //todo undo comment after implement token
-//                Intent tokenActivity = new Intent(this, ViewInfoAdminActivity.class); //todo undo comment after implement token
-                Intent tokenActivity = new Intent(this, FingerTouchActivity.class); //todo remove after implement token
-//                tokenActivity.putExtra("username", username);  // todo undo comment after implement token
+                tokenActivity.putExtra("username", username);
                 tokenActivity.putExtra("role", role);
                 startActivity(tokenActivity);
             } else {
