@@ -36,6 +36,9 @@
     <string name="view_user_info">View User Info</string>
     <string name="use_your_fingerprint_to_continue">Use your finger print to continue</string>
     <string name="verifyFinger">Verify</string>
+    <string name="role_username">Role: username</string>
+    <string name="list_of_citizens_who_passed_the_census">List of citizens who passed the census</string>
+    <string name="no_one_has_conducted_a_population_census_yet">No one has conducted a population census yet</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

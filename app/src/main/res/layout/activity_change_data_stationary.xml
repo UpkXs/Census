@@ -7,7 +7,7 @@
     android:overScrollMode="never"
     android:scrollbars="none"
     android:layout_gravity="center"
-    tools:context=".view.ViewInfoControllerActivity">
+    tools:context=".page.ChangeDataStationaryActivity">
 
 
     <LinearLayout

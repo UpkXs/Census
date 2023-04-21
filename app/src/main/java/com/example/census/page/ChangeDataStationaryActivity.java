@@ -1,4 +1,4 @@
-package com.example.census.view;
+package com.example.census.page;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,16 +14,14 @@ import android.widget.TextView;
 import com.example.census.MainActivity;
 import com.example.census.R;
 import com.example.census.adapter.UserListAdapter;
-import com.example.census.auth.LoginActivity;
-import com.example.census.model.Citizen;
 import com.example.census.model.Role;
-import com.example.census.page.SelectActivity;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
+import com.example.census.view.ViewInfoControllerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewInfoControllerActivity extends AppCompatActivity {
+public class ChangeDataStationaryActivity extends AppCompatActivity {
 
     private Role   role;
     private String username;
@@ -35,7 +33,7 @@ public class ViewInfoControllerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_info_controller);
+        setContentView(R.layout.activity_change_data_stationary);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -43,7 +41,9 @@ public class ViewInfoControllerActivity extends AppCompatActivity {
             username = (String) extras.get("username");
         }
 
-        myDB = new MyDatabaseHelper(ViewInfoControllerActivity.this);
+        System.out.println("5E5n78vR :: ChangeDataStationaryActivity");
+
+        myDB = new MyDatabaseHelper(ChangeDataStationaryActivity.this);
 
         TextView noOnePassed = findViewById(R.id.noOnePassed);
 
@@ -52,7 +52,7 @@ public class ViewInfoControllerActivity extends AppCompatActivity {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainActivity = new Intent(ViewInfoControllerActivity.this, MainActivity.class);
+                Intent mainActivity = new Intent(ChangeDataStationaryActivity.this, MainActivity.class);
                 startActivity(mainActivity);
             }
         });
@@ -65,6 +65,7 @@ public class ViewInfoControllerActivity extends AppCompatActivity {
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             noOnePassed.setVisibility(View.GONE);
+            System.out.println("3S23Fe5f :: role : " + role);
             UserListAdapter adapter = new UserListAdapter(userNames, role);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -72,7 +73,7 @@ public class ViewInfoControllerActivity extends AppCompatActivity {
     }
 
     public List<String> getCitizenUsernames() {
-        Cursor cursor = myDB.selectFromTable("select username from citizen_login");
+        Cursor       cursor           = myDB.selectFromTable("select username from citizen_login");
         List<String> citizenUsernames = new ArrayList<>();
         if (cursor.getCount() == 0){
             return citizenUsernames;
@@ -84,4 +85,5 @@ public class ViewInfoControllerActivity extends AppCompatActivity {
         }
         return citizenUsernames;
     }
+
 }

@@ -85,13 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                 Intent viewInfoAdminActivity = new Intent(this, ViewInfoAdminActivity.class);
                 viewInfoAdminActivity.putExtra("username", username);
                 viewInfoAdminActivity.putExtra("role", role);
-                startActivity(tokenActivity);
+                startActivity(viewInfoAdminActivity);
             } else {
                 System.out.println("isNull!");
                 toastShow("Admin does not found!");
             }
         } else if (role.label.equals(Role.STATIONARY.label)) {
             Stationary stationary = getStationary(username);
+            System.out.println(stationary.getStationary_username() + " asasasas");
+            System.out.println(stationary.getStationary_password() + " aasasasasa");
             if (stationary.getStationary_username() == null) {
                 System.out.println("isNull!");
                 toastShow("Stationary does not found!");
@@ -104,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(tokenActivity);
             } else {
                 System.out.println("isNull!");
+                System.out.println("34t3443!");
                 toastShow("Stationary does not found!");
             }
         } else if (role.label.equals(Role.CONTROLLER.label)) {
@@ -143,6 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                 stationary.setRegion_id(cursor.getInt(4));
             }
         }
+        System.out.println(stationary.getStationary_username() + "fafasfasfasfasfas");
+        System.out.println(stationary.getStationary_password() + "fafasfasfasfasfas");
         return stationary;
     }
 
