@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.census.R;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TokenActivity extends AppCompatActivity {

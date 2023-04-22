@@ -10,9 +10,8 @@ import android.widget.TextView;
 
 import com.example.census.MainActivity;
 import com.example.census.R;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 import com.example.census.page.ChangeDataStationaryActivity;
-import com.example.census.page.SelectActivity;
 
 public class ViewInfoStationaryActivity extends AppCompatActivity {
 

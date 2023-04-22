@@ -14,9 +14,9 @@ import android.widget.TextView;
 import com.example.census.MainActivity;
 import com.example.census.R;
 import com.example.census.adapter.UserListAdapter;
-import com.example.census.model.Role;
+import com.example.census.enums.Action;
+import com.example.census.enums.Role;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
-import com.example.census.view.ViewInfoControllerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public class ChangeDataStationaryActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.VISIBLE);
             noOnePassed.setVisibility(View.GONE);
             System.out.println("3S23Fe5f :: role : " + role);
-            UserListAdapter adapter = new UserListAdapter(userNames, role);
+            UserListAdapter adapter = new UserListAdapter(userNames, role, Action.CHANGE);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
         }

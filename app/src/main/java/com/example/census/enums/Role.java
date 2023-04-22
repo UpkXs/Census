@@ -1,4 +1,4 @@
-package com.example.census.model;
+package com.example.census.enums;
 
 public enum Role {
     ADMIN("Admin"),

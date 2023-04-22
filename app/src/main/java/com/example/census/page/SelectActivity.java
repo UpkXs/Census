@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import com.example.census.MainActivity;
 import com.example.census.R;
-import com.example.census.model.Role;
-import com.example.census.view.ViewInfoAdminActivity;
+import com.example.census.enums.Role;
 
 public class SelectActivity extends AppCompatActivity {
 

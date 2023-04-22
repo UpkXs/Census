@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="150dp"
             android:layout_marginEnd="50dp"
             android:fontFamily="@font/poppinsregular"
             android:gravity="center"
@@ -36,65 +36,39 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnRegisterNewStationary"
+                android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/register_new_stationary"
+                android:text="@string/register"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"
                 android:textSize="16sp"
                 app:backgroundTint="@null" />
 
             <Button
-                android:id="@+id/btnRegisterNewController"
+                android:id="@+id/btnDelete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/register_new_controller"
+                android:text="@string/delete"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"
                 android:textSize="16sp"
                 app:backgroundTint="@null" />
 
             <Button
-                android:id="@+id/btnDeleteStationary"
+                android:id="@+id/btnChangeData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/delete_stationary"
-                android:textAllCaps="false"
-                android:textColor="@color/second_main_color"
-                android:textSize="16sp"
-                app:backgroundTint="@null" />
-
-            <Button
-                android:id="@+id/btnDeleteController"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/btn_bg"
-                android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/delete_controller"
-                android:textAllCaps="false"
-                android:textColor="@color/second_main_color"
-                android:textSize="16sp"
-                app:backgroundTint="@null" />
-
-            <Button
-                android:id="@+id/btnChangeUserInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/btn_bg"
-                android:fontFamily="@font/poppinsmediumitalic"
-                android:text="@string/change_user_info"
+                android:text="@string/change_data"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"
                 android:textSize="16sp"

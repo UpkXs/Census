@@ -40,6 +40,18 @@
     <string name="list_of_citizens_who_passed_the_census">List of citizens who passed the census</string>
     <string name="no_one_has_conducted_a_population_census_yet">No one has conducted a population census yet</string>
     <string name="use_your_faceid_to_continue">Use your faceID to continue</string>
+    <string name="change_data">Change Data</string>
+    <string name="delete">Delete</string>
+    <string name="click_to_name_that_you_want_to_delete">Click to name that you want to delete</string>
+    <string name="there_is_no_any_stationary_or_controller">There is no any stationary or controller</string>
+    <string name="go_to_view_admin_page">Go to View Admin Page</string>
+    <string name="do_you_really_want_to_delete">Do you really want to delete?</string>
+    <string name="id">Id</string>
+    <string name="usernameWithDoubleDot">Username:</string>
+    <string name="idWithDoubleDot">Id:</string>
+    <string name="region">Region</string>
+    <string name="regionWithDoubleDot">Region:</string>
+    <string name="roleWithDoubleDot">Role:</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

@@ -14,10 +14,8 @@ import android.widget.TextView;
 import com.example.census.MainActivity;
 import com.example.census.R;
 import com.example.census.adapter.UserListAdapter;
-import com.example.census.auth.LoginActivity;
-import com.example.census.model.Citizen;
-import com.example.census.model.Role;
-import com.example.census.page.SelectActivity;
+import com.example.census.enums.Action;
+import com.example.census.enums.Role;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 
 import java.util.ArrayList;
@@ -65,7 +63,7 @@ public class ViewInfoControllerActivity extends AppCompatActivity {
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             noOnePassed.setVisibility(View.GONE);
-            UserListAdapter adapter = new UserListAdapter(userNames, role);
+            UserListAdapter adapter = new UserListAdapter(userNames, role, Action.VIEW);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
         }

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:layout_gravity="center"
+    tools:context=".page.StationaryAndControllerDeleteActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/poppinsregular"
+            android:gravity="center"
+            android:text="@string/do_you_really_want_to_delete"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/idWithDoubleDot"
+                android:textAllCaps="false"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/personId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppinsbold"
+                android:hint="@string/id"
+                android:textAllCaps="false"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usernameWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/regionWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/region"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/roleWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/role"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:ems="7"
+            android:background="@drawable/login_btn_bg"
+            app:backgroundTint="@null"
+            android:text="@string/delete"
+            android:textColor="@color/text_main_color"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.census.R;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 
 public class UserDetailsActivity extends AppCompatActivity {
 

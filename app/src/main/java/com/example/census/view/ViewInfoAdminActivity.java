@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.example.census.MainActivity;
 import com.example.census.R;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 import com.example.census.page.ChangeDataActivity;
 import com.example.census.page.DeleteActivity;
 import com.example.census.auth.RegisterActivity;
@@ -30,42 +30,26 @@ public class ViewInfoAdminActivity extends AppCompatActivity {
             role = (Role) extras.get("role");
         }
 
-        Button btnRegisterNewStationary = findViewById(R.id.btnRegisterNewStationary);
-        Button btnRegisterNewController = findViewById(R.id.btnRegisterNewController);
-        Button btnDeleteStationary = findViewById(R.id.btnDeleteStationary);
-        Button btnDeleteController = findViewById(R.id.btnDeleteController);
-        Button btnChangeUserInfo = findViewById(R.id.btnChangeUserInfo);
+        Button btnRegister = findViewById(R.id.btnRegister);
+        Button btnDelete = findViewById(R.id.btnDelete);
+        Button btnChangeData = findViewById(R.id.btnChangeData);
         Button btnLogOut = findViewById(R.id.btnLogOut);
 
-        btnRegisterNewStationary.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToRegisterActivity(view, Role.STATIONARY);
+                goToRegisterActivity(view);
             }
         });
 
-        btnRegisterNewController.setOnClickListener(new View.OnClickListener() {
+        btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToRegisterActivity(view, Role.CONTROLLER);
+                goToDeleteActivity(view);
             }
         });
 
-        btnDeleteStationary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToDeleteActivity(view, Role.STATIONARY); // todo
-            }
-        });
-
-        btnDeleteController.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToDeleteActivity(view, Role.CONTROLLER); // todo
-            }
-        });
-
-        btnChangeUserInfo.setOnClickListener(new View.OnClickListener() {
+        btnChangeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToChangeDataActivity(view, Role.CITIZEN); // todo
@@ -81,15 +65,13 @@ public class ViewInfoAdminActivity extends AppCompatActivity {
         });
     }
 
-    public void goToRegisterActivity(View view, Role role) {
+    public void goToRegisterActivity(View view) {
         Intent registerActivity = new Intent(this, RegisterActivity.class);
-        registerActivity.putExtra("role", role);
         startActivity(registerActivity);
     }
 
-    public void goToDeleteActivity(View view, Role role) {
+    public void goToDeleteActivity(View view) {
         Intent deleteActivity = new Intent(this, DeleteActivity.class);
-        deleteActivity.putExtra("role", role);
         startActivity(deleteActivity);
     }
 

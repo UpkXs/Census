@@ -16,8 +16,7 @@ import android.widget.Toast;
 import com.example.census.R;
 import com.example.census.database.PasswordToHash;
 import com.example.census.model.CitizenLogin;
-import com.example.census.model.Role;
-import com.example.census.page.SelectActivity;
+import com.example.census.enums.Role;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.token.TokenActivity;
 

@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +21,7 @@ import com.example.census.R;
 import com.example.census.database.PasswordToHash;
 import com.example.census.model.Controller;
 import com.example.census.model.Region;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 import com.example.census.model.Stationary;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.view.ViewInfoAdminActivity;
@@ -36,17 +38,18 @@ public class RegisterActivity extends AppCompatActivity {
     private MyDatabaseHelper myDB;
     private List<String> regionList;
 
+    private CheckBox checkboxStationary;
+    private CheckBox checkboxController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            role = (Role) extras.get("role");
-        }
+        checkboxStationary = (CheckBox) findViewById(R.id.checkboxStationary);
+        checkboxController = (CheckBox) findViewById(R.id.checkboxController);
 
-        String registerPage = role.label + " Registration Page";
+        String registerPage = Role.ADMIN.label + " Registration Page"; // todo
         TextView textView = findViewById(R.id.roleId);
         textView.setText(registerPage);
 
@@ -69,24 +72,56 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // Add an OnCheckedChangeListener to checkbox1
+        checkboxStationary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Disable checkbox2 if checkbox1 is checked
+                checkboxController.setEnabled(!isChecked);
+                role = Role.STATIONARY;
+            }
+        });
+
+        // Add an OnCheckedChangeListener to checkbox2
+        checkboxController.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Disable checkbox1 if checkbox2 is checked
+                checkboxStationary.setEnabled(!isChecked);
+                role = Role.CONTROLLER;
+            }
+        });
+
         Button registerBtn = findViewById(R.id.registerBtn);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 stationary = new Stationary();
                 controller = new Controller();
-                register(view, stationary, controller);
+                System.out.println("jsH9I95q :: role : " + role);
+                register(view, stationary, controller, region, role);
             }
         });
     }
 
     long rows = 0;
-    public void register(View view, Stationary stationary, Controller controller) {
+    public void register(View view, Stationary stationary, Controller controller, Region region, Role role) {
         EditText username = findViewById(R.id.inputUsername);
         EditText password = findViewById(R.id.inputPassword);
 
         PasswordToHash passwordToHash = new PasswordToHash();
         String hashedPassword = passwordToHash.doHash(String.valueOf(password.getText()));
+
+        System.out.println("QPZ35VxV :: role : " + role);
+
+        if (username.getText().toString().isEmpty() ||
+                password.getText().toString().isEmpty() ||
+                region == null ||
+                role == null) {
+            System.out.println("lrzFGvdD :: Please enter all data");
+            toastShow("Please enter all data");
+            return;
+        }
 
         if (role.label.equals("Stationary")) {
             stationary.setStationary_username(username.getText().toString());
@@ -132,8 +167,6 @@ public class RegisterActivity extends AppCompatActivity {
             return region;
         } else {
             while (cursor.moveToNext()) {
-                System.out.println("region == " + cursor.getColumnName(0));
-                System.out.println("region == " + cursor.getColumnName(1));
                 region.setRegion_id(cursor.getInt(0));
                 region.setRegion_name(cursor.getString(1));
             }

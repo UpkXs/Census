@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.census.R;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 import com.example.census.token.TokenActivity;
 import com.example.census.view.ViewInfoAdminActivity;
 

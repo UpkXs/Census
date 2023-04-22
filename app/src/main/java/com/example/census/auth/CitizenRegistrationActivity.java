@@ -23,7 +23,7 @@ import com.example.census.database.PasswordToHash;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Region;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 
 import java.util.ArrayList;
@@ -99,6 +99,16 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         PasswordToHash passwordToHash = new PasswordToHash();
         String hashedPassword = passwordToHash.doHash(String.valueOf(password.getText()));
 
+        if (firstName.getText().toString().isEmpty() ||
+                lastName.getText().toString().isEmpty() ||
+                username.getText().toString().isEmpty() ||
+                password.getText().toString().isEmpty() ||
+                region == null) {
+            System.out.println("NhND57a8 :: Please enter all data");
+            toastShow("Please enter all data");
+            return;
+        }
+
         citizenLogin.setUsername(username.getText().toString());
         citizenLogin.setPassword(hashedPassword);
         rows = myDB.addCitizenLogin(citizenLogin); // insert into citizenLogin table new record
@@ -146,8 +156,6 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
             return region;
         } else {
             while (cursor.moveToNext()) {
-                System.out.println("region == " + cursor.getColumnName(0));
-                System.out.println("region == " + cursor.getColumnName(1));
                 region.setRegion_id(cursor.getInt(0));
                 region.setRegion_name(cursor.getString(1));
             }

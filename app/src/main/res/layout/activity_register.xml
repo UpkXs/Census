@@ -112,6 +112,37 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginTop="10dp">
+
+                <CheckBox
+                    android:id="@+id/checkboxStationary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/stationary"
+                    android:textSize="16sp"
+                    android:textColor="@color/second_main_color"
+                    android:buttonTint="@color/second_main_color" />
+
+                <CheckBox
+                    android:id="@+id/checkboxController"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:text="@string/controller"
+                    android:textSize="16sp"
+                    android:textColor="@color/second_main_color"
+                    android:buttonTint="@color/second_main_color" />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/registerBtn"
                 android:layout_width="wrap_content"

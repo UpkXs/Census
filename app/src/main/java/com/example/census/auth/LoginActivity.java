@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.census.R;
 import com.example.census.database.PasswordToHash;
 import com.example.census.model.Controller;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
 import com.example.census.model.Stationary;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.token.TokenActivity;
@@ -76,10 +76,9 @@ public class LoginActivity extends AppCompatActivity {
 
         if (role.label.equals(Role.ADMIN.label)) {
             if (checkIsAdmin(username, password)) {
-                Intent viewInfoAdminActivity = new Intent(this, ViewInfoAdminActivity.class);
-                viewInfoAdminActivity.putExtra("username", username);
-                viewInfoAdminActivity.putExtra("role", role);
-                startActivity(viewInfoAdminActivity);
+                tokenActivity.putExtra("username", username);
+                tokenActivity.putExtra("role", role);
+                startActivity(tokenActivity);
             } else {
                 System.out.println("isNull!");
                 toastShow("Admin does not found!");
@@ -140,8 +139,6 @@ public class LoginActivity extends AppCompatActivity {
                 stationary.setRegion_id(cursor.getInt(4));
             }
         }
-        System.out.println(stationary.getStationary_username() + "fafasfasfasfasfas");
-        System.out.println(stationary.getStationary_password() + "fafasfasfasfasfas");
         return stationary;
     }
 

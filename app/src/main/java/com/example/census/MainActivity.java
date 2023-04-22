@@ -7,10 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.census.auth.CitizenLoginActivity;
 import com.example.census.auth.LoginActivity;
-import com.example.census.model.Role;
+import com.example.census.enums.Role;
+import com.example.census.sqliteDatabase.MyDatabaseHelper;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,10 +24,15 @@ public class MainActivity extends AppCompatActivity {
     int controller;
     int citizen;
 
+    private MyDatabaseHelper myDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myDB = new MyDatabaseHelper(MainActivity.this);
+        myDB.addRegion(); // add default Regions
 
         Button adminBtn = findViewById(R.id.adminBtn);
         admin = adminBtn.getId();

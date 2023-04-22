@@ -21,7 +21,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private             Context context;
     private static final String  DATABASE_NAME    = "Census.db";
-    private static final int     DATABASE_VERSION = 1;
+    private static final int     DATABASE_VERSION = 4; // todo increment (only!!! when you need clear database)
 
     //region Stationary table
     private static final String STATIONARY_TABLE_NAME = "stationary";
@@ -117,17 +117,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTableCitizen);
 
         String createTableRegion = "CREATE TABLE " + REGION_TABLE_NAME +
-                " (" + REGION_ID + " INTEGER, " +
+                " (" + REGION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                        REGION_NAME + " TEXT);";
         db.execSQL(createTableRegion);
-
-
-        for (String region: regionsList) {
-            long result = addRegion(region, db);
-            if (result == -1) {
-                Toast.makeText(context, "Failed to insert region " + region, Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     @Override
@@ -190,10 +182,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return db.insert(CITIZEN_TABLE_NAME, null, cv);
     }
 
-    private long addRegion(String region, SQLiteDatabase db) {
+    public long addRegion() {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(REGION_NAME, region);
+        for (String region: regionsList) {
+            cv.put(REGION_NAME, region);
+            long result = db.insert(REGION_TABLE_NAME, null, cv);
+            if (result == -1) {
+                Toast.makeText(context, "Failed to insert region " + region, Toast.LENGTH_SHORT).show();
+            }
+        }
 
         return db.insert(REGION_TABLE_NAME, null, cv);
     }
@@ -206,5 +205,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery(sql, null);
         }
         return cursor;
+    }
+
+    public long deleteOneRow(String tableName, String rowId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(tableName, "_id=?", new String[] {rowId});
     }
 }
