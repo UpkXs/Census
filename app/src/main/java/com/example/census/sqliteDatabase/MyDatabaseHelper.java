@@ -13,6 +13,8 @@ import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Controller;
 import com.example.census.model.Stationary;
+import com.example.census.modelDAO.ControllerDAO;
+import com.example.census.modelDAO.StationaryDAO;
 
 import java.util.Arrays;
 import java.util.List;
@@ -210,5 +212,25 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public long deleteOneRow(String tableName, String rowId) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(tableName, "_id=?", new String[] {rowId});
+    }
+
+    public long updateStationary(StationaryDAO stationaryDAO) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(STATIONARY_USERNAME, stationaryDAO.getStationary_username());
+        cv.put(STATIONARY_PASSWORD, stationaryDAO.getStationary_password());
+        cv.put(STATIONARY_REGION_ID, stationaryDAO.getRegion_id());
+
+        return db.update(STATIONARY_TABLE_NAME, cv, "_id=?", new String[]{String.valueOf(stationaryDAO.getStationary_id())});
+    }
+
+    public long updateController(ControllerDAO controllerDAO) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CONTROLLER_USERNAME, controllerDAO.getController_username());
+        cv.put(CONTROLLER_PASSWORD, controllerDAO.getController_password());
+        cv.put(CONTROLLER_REGION_ID, controllerDAO.getRegion_id());
+
+        return db.update(CONTROLLER_TABLE_NAME, cv, "_id=?", new String[] {String.valueOf(controllerDAO.getController_id())});
     }
 }

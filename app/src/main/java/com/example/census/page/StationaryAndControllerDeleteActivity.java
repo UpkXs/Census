@@ -38,7 +38,7 @@ public class StationaryAndControllerDeleteActivity extends AppCompatActivity {
             username = (String) extras.get("username");
         }
 
-        System.out.println("6t28OO4E :: UserDetailsChangeActivity");
+        System.out.println("6t28OO4E :: StationaryAndControllerDeleteActivity");
         System.out.println("UJDn4XVJ :: role : " + role);
         System.out.println("iF192x72 :: username : " + username);
 
@@ -133,7 +133,7 @@ public class StationaryAndControllerDeleteActivity extends AppCompatActivity {
     }
 
     public StationaryDAO getStationary(String username) {
-        Cursor cursor = myDB.selectFromTable("select _id, stationary_username, region_id from stationary " +
+        Cursor cursor = myDB.selectFromTable("select _id, stationary_username, region_id, stationary_password from stationary " +
                                                     "where stationary_username = '" + username + "';");
         StationaryDAO stationaryDAO = new StationaryDAO();
         if (cursor.getCount() == 0){
@@ -143,13 +143,14 @@ public class StationaryAndControllerDeleteActivity extends AppCompatActivity {
                 stationaryDAO.setStationary_id(cursor.getInt(0));
                 stationaryDAO.setStationary_username(cursor.getString(1));
                 stationaryDAO.setRegion_id(cursor.getInt(2));
+                stationaryDAO.setStationary_password(cursor.getString(3));
             }
         }
         return stationaryDAO;
     }
 
     public ControllerDAO getController(String username) {
-        Cursor cursor = myDB.selectFromTable("select _id, controller_username, region_id from controller " +
+        Cursor cursor = myDB.selectFromTable("select _id, controller_username, region_id, controller_password from controller " +
                 "where controller_username = '" + username + "';");
         ControllerDAO controllerDAO = new ControllerDAO();
         if (cursor.getCount() == 0){
@@ -159,6 +160,7 @@ public class StationaryAndControllerDeleteActivity extends AppCompatActivity {
                 controllerDAO.setController_id(cursor.getInt(0));
                 controllerDAO.setController_username(cursor.getString(1));
                 controllerDAO.setRegion_id(cursor.getInt(2));
+                controllerDAO.setController_password(cursor.getString(3));
             }
         }
         return controllerDAO;

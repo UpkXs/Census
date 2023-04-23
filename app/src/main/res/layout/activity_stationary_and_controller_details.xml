@@ -4,6 +4,278 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:layout_gravity="center"
     tools:context=".page.StationaryAndControllerDetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/poppinsregular"
+            android:gravity="center"
+            android:text="@string/change_some_data_to_update"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/idWithDoubleDot"
+                android:textAllCaps="false"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/personId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
+                android:hint="@string/id"
+                android:textAllCaps="false"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:backgroundTint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usernameWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:textAllCaps="false" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:backgroundTint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/regionWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:textAllCaps="false" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                app:boxStrokeColor="@color/second_main_color"
+                app:boxStrokeWidth="1dp"
+                android:layout_marginEnd="50dp" >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:textColor="@color/second_main_color"
+                    android:drawablePadding="10dp"
+                    android:text="@string/select_region"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/roleWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/role"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/poppinsregular"
+            android:gravity="center"
+            android:text="@string/to_change_password_enter_old_password"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/oldPasswordLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/old_password_with_double_dot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:textAllCaps="false" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/old_password"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:inputType="textPassword"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/newPasswordLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_password_with_double_dot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:textAllCaps="false" />
+
+            <EditText
+                android:id="@+id/newPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/new_password"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:inputType="textPassword"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:ems="7"
+            android:background="@drawable/login_btn_bg"
+            app:backgroundTint="@null"
+            android:text="@string/update"
+            android:textColor="@color/text_main_color"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,13 @@
     <string name="regionWithDoubleDot">Region:</string>
     <string name="roleWithDoubleDot">Role:</string>
     <string name="click_to_name_that_you_want_to_change">Click to name that you want to change</string>
+    <string name="change_some_data_to_update">Change some data to update</string>
+    <string name="update">Update</string>
+    <string name="old_password_with_double_dot">Old Password:</string>
+    <string name="to_change_password_enter_old_password">To change password enter old password:</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password_with_double_dot">New Password:</string>
+    <string name="new_password">New Password</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

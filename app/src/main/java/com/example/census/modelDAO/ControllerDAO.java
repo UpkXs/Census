@@ -4,14 +4,16 @@ public class ControllerDAO {
     private int controller_id;
     private String controller_username;
     private int region_id;
+    private String controller_password;
 
     public ControllerDAO() {
     }
 
-    public ControllerDAO(int controller_id, String controller_username, int region_id) {
+    public ControllerDAO(int controller_id, String controller_username, int region_id, String controller_password) {
         this.controller_id = controller_id;
         this.controller_username = controller_username;
         this.region_id = region_id;
+        this.controller_password = controller_password;
     }
 
     public int getController_id() {
@@ -36,5 +38,13 @@ public class ControllerDAO {
 
     public void setRegion_id(int region_id) {
         this.region_id = region_id;
+    }
+
+    public String getController_password() {
+        return controller_password;
+    }
+
+    public void setController_password(String controller_password) {
+        this.controller_password = controller_password;
     }
 }

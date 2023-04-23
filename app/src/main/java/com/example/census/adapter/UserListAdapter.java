@@ -66,7 +66,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
                     userDetailsChangeActivity.putExtra("role", role);
                     userDetailsChangeActivity.putExtra("username", userName);
                     context.startActivity(userDetailsChangeActivity);
-                } else if (action.label.equals(Action.CHANGE.label) && role.label.equals(Role.ADMIN.label)) {
+                } else if (action.label.equals(Action.CHANGE_ADMIN.label)) {
                     Intent stationaryAndControllerDetailsActivity  = new Intent(context, StationaryAndControllerDetailsActivity.class);
                     stationaryAndControllerDetailsActivity.putExtra("role", role);
                     stationaryAndControllerDetailsActivity.putExtra("username", userName);
