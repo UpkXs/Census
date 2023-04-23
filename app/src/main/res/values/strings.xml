@@ -52,6 +52,7 @@
     <string name="region">Region</string>
     <string name="regionWithDoubleDot">Region:</string>
     <string name="roleWithDoubleDot">Role:</string>
+    <string name="click_to_name_that_you_want_to_change">Click to name that you want to change</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

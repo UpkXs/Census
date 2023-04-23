@@ -52,7 +52,7 @@ public class ViewInfoAdminActivity extends AppCompatActivity {
         btnChangeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToChangeDataActivity(view, Role.CITIZEN); // todo
+                goToChangeDataActivity(view); // todo
             }
         });
 
@@ -75,9 +75,8 @@ public class ViewInfoAdminActivity extends AppCompatActivity {
         startActivity(deleteActivity);
     }
 
-    public void goToChangeDataActivity(View view, Role role) {
+    public void goToChangeDataActivity(View view) {
         Intent changeDataActivity = new Intent(this, ChangeDataActivity.class);
-        changeDataActivity.putExtra("role", role);
         startActivity(changeDataActivity);
     }
 }

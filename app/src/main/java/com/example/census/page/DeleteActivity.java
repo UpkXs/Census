@@ -58,12 +58,6 @@ public class DeleteActivity extends AppCompatActivity {
         List<String> controllerUserNames    = getControllerUsernames(); // Populate list of Controller usernames
 
         if (stationaryUserNames.isEmpty() && controllerUserNames.isEmpty()) {
-//            txtStationary.setVisibility(View.GONE);
-//            recyclerViewStationary.setVisibility(View.GONE);
-//
-//            txtController.setVisibility(View.GONE);
-//            recyclerViewController.setVisibility(View.GONE);
-
             noOnePassed.setVisibility(View.VISIBLE);
         }
 
@@ -94,24 +88,6 @@ public class DeleteActivity extends AppCompatActivity {
             recyclerViewController.setAdapter(adapterController);
             recyclerViewController.setLayoutManager(new LinearLayoutManager(this));
         }
-
-//        if (!stationaryUserNames.isEmpty() && !controllerUserNames.isEmpty()) {
-//            txtStationary.setVisibility(View.VISIBLE);
-//            recyclerViewStationary.setVisibility(View.VISIBLE);
-//
-//            txtController.setVisibility(View.VISIBLE);
-//            recyclerViewController.setVisibility(View.VISIBLE);
-//
-//            noOnePassed.setVisibility(View.GONE);
-//
-//            UserListAdapter adapterStationary = new UserListAdapter(stationaryUserNames, Role.STATIONARY, Action.DELETE);
-//            recyclerViewStationary.setAdapter(adapterStationary);
-//            recyclerViewStationary.setLayoutManager(new LinearLayoutManager(this));
-//
-//            UserListAdapter adapterController = new UserListAdapter(controllerUserNames, Role.CONTROLLER, Action.DELETE);
-//            recyclerViewController.setAdapter(adapterController);
-//            recyclerViewController.setLayoutManager(new LinearLayoutManager(this));
-//        }
     }
 
     public List<String> getStationaryUsernames() {
