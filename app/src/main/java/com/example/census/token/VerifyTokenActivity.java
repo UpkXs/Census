@@ -114,7 +114,7 @@ public class VerifyTokenActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.textResendCode).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.textResendCode).setOnClickListener(new View.OnClickListener() { // todo clear edit text inputs
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

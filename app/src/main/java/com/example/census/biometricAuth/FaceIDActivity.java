@@ -91,8 +91,10 @@ public class FaceIDActivity extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(), "Verify Success", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(FaceIDActivity.this, FingerTouchActivity.class);
-                startActivity(intent);
+                Intent fingerTouchActivity = new Intent(FaceIDActivity.this, FingerTouchActivity.class);
+                fingerTouchActivity.putExtra("role", role);
+                fingerTouchActivity.putExtra("username", username);
+                startActivity(fingerTouchActivity);
             }
 
             @Override

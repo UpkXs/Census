@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.census.R;
-import com.example.census.auth.RegisterActivity;
 import com.example.census.database.PasswordToHash;
 import com.example.census.enums.Role;
 import com.example.census.model.Region;
@@ -37,7 +37,7 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
     private StationaryDAO stationaryDAO;
     private ControllerDAO controllerDAO;
 
-    private EditText editTxtPersonID;
+    private TextView txtPersonID;
     private EditText editTxtUsername;
     private TextView txtRole;
 
@@ -64,7 +64,7 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
 
         myDB = new MyDatabaseHelper(StationaryAndControllerDetailsActivity.this);
 
-        editTxtPersonID = findViewById(R.id.personId);
+        txtPersonID     = findViewById(R.id.personId); // do not change role
         editTxtUsername = findViewById(R.id.username);
         txtRole = findViewById(R.id.role); // do not change role
 
@@ -91,7 +91,7 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
                 toastShow("Region name is empty");
             }
 
-            editTxtPersonID.setText(String.valueOf(stationaryDAO.getStationary_id()));
+            txtPersonID.setText(String.valueOf(stationaryDAO.getStationary_id()));
             editTxtUsername.setText(stationaryDAO.getStationary_username());
             txtRole.setText(role.label);
         } else if (role.label.equals(Role.CONTROLLER.label)) {
@@ -115,10 +115,12 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
                 toastShow("Region name is empty");
             }
 
-            editTxtPersonID.setText(String.valueOf(controllerDAO.getController_id()));
+            txtPersonID.setText(String.valueOf(controllerDAO.getController_id()));
             editTxtUsername.setText(controllerDAO.getController_username());
             txtRole.setText(role.label);
         }
+
+        region = regionName;
 
         regionList = new ArrayList<>();
 
@@ -127,8 +129,11 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_item, regionList);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            adapter.setAutofillOptions(regionName.getRegion_name()); // todo check default selected region name in DB
+        }
+
         autoCompleteTextView.setAdapter(adapter);
-        autoCompleteTextView.setText(regionName.getRegion_name());
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -138,7 +143,6 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
                 Toast.makeText(StationaryAndControllerDetailsActivity.this, "Selected region: " + region.getRegion_name(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
         btnUpdate = findViewById(R.id.btnUpdate);
 
@@ -153,22 +157,31 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
         });
     }
 
-    public String getNewHashedPassword() {
+    public String getNewHashedPassword() { // todo when old password is incorrect do something, and fix visibility
+        editTxtOldPassword = findViewById(R.id.oldPassword);
+        editTxtNewPassword = findViewById(R.id.newPassword);
+        editTxtNewPassword.setVisibility(View.GONE);
+
         String oldPassword = editTxtOldPassword.getText().toString().trim();
-        String newPassword = editTxtNewPassword.getText().toString().trim();
+        System.out.println("2JA0WSG0 :: oldPassword : " + oldPassword);
 
         PasswordToHash passwordToHash = new PasswordToHash();
         String hashedPassword = passwordToHash.doHash(oldPassword);
-
-        System.out.println("2JA0WSG0 :: oldPassword : " + oldPassword);
         System.out.println("wEe2VkC4 :: hashedPassword : " + hashedPassword);
-        System.out.println("BT2Y6x50 :: newPassword : " + newPassword);
 
         String newHashedPassword = "";
         if (role.label.equals(Role.STATIONARY.label) && stationaryDAO.getStationary_password().equals(hashedPassword)) {
+            editTxtNewPassword.setVisibility(View.VISIBLE);
+            String newPassword = editTxtNewPassword.getText().toString().trim();
             newHashedPassword = passwordToHash.doHash(newPassword);
+            System.out.println("BT2Y6x50 :: newPassword : " + newPassword);
+            System.out.println("14ayUM3y :: newHashedPassword : " + newHashedPassword);
         } else if (role.label.equals(Role.CONTROLLER.label) && controllerDAO.getController_password().equals(hashedPassword)) {
+            editTxtNewPassword.setVisibility(View.VISIBLE);
+            String newPassword = editTxtNewPassword.getText().toString().trim();
             newHashedPassword = passwordToHash.doHash(newPassword);
+            System.out.println("9vBtA07d :: newPassword : " + newPassword);
+            System.out.println("MkH1JVO6 :: newHashedPassword : " + newHashedPassword);
         }
 
         return newHashedPassword;
@@ -177,7 +190,7 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
     public void getChangedDataAndUpdate(String newHashedPassword) {
         if (role.label.equals(Role.STATIONARY.label)) {
             StationaryDAO stationaryDAO = new StationaryDAO();
-            stationaryDAO.setStationary_id(Integer.parseInt(editTxtPersonID.getText().toString().trim()));
+            stationaryDAO.setStationary_id(Integer.parseInt(txtPersonID.getText().toString().trim()));
             stationaryDAO.setStationary_username(editTxtUsername.getText().toString().trim());
 
             System.out.println("6SL2Ot5v :: region.getRegion_id() : " + region.getRegion_id());
@@ -191,7 +204,7 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
 
         } else if (role.label.equals(Role.CONTROLLER.label)) {
             ControllerDAO controllerDAO = new ControllerDAO();
-            controllerDAO.setController_id(Integer.parseInt(editTxtPersonID.getText().toString().trim()));
+            controllerDAO.setController_id(Integer.parseInt(txtPersonID.getText().toString().trim()));
             controllerDAO.setController_username(editTxtUsername.getText().toString().trim());
 
             System.out.println("z8INX2A6 :: region.getRegion_id() : " + region.getRegion_id());
@@ -211,6 +224,8 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
             toastShow(role.label + " with username " + stationaryDAO.getStationary_username() + " failed to update");
         } else {
             toastShow(role.label + " with username " + stationaryDAO.getStationary_username() + " successfully updated");
+            Intent viewInfoAdminActivity = new Intent(getApplicationContext(), ViewInfoAdminActivity.class);
+            startActivity(viewInfoAdminActivity); // after successfully updating go to ViewInfoAdminActivity
         }
     }
 
@@ -220,19 +235,9 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
             toastShow(role.label + " with username " + controllerDAO.getController_username() + " failed to update");
         } else {
             toastShow(role.label + " with username " + controllerDAO.getController_username() + " successfully updated");
+            Intent viewInfoAdminActivity = new Intent(getApplicationContext(), ViewInfoAdminActivity.class);
+            startActivity(viewInfoAdminActivity); // after successfully updating go to ViewInfoAdminActivity
         }
-    }
-
-    public void update(View view, String id, String tableName) {
-        long result = myDB.deleteOneRow(tableName, id); // todo add update method in myDB
-        if (result == -1) {
-            toastShow(role.label + " with id " + id + " not found in DB");
-        } else {
-            toastShow(role.label + " with id " + id + " successfully deleted");
-        }
-
-        Intent viewInfoAdminActivity = new Intent(getApplicationContext(), ViewInfoAdminActivity.class);
-        startActivity(viewInfoAdminActivity); // after delete go to ViewInfoAdminActivity
     }
 
     public StationaryDAO getStationary(String username) {

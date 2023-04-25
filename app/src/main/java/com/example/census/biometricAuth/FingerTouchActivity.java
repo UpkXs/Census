@@ -19,6 +19,7 @@ import com.example.census.R;
 import com.example.census.enums.Role;
 import com.example.census.token.TokenActivity;
 import com.example.census.view.ViewInfoAdminActivity;
+import com.example.census.view.ViewInfoCitizenActivity;
 
 import java.util.concurrent.Executor;
 
@@ -92,8 +93,10 @@ public class FingerTouchActivity extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(), "Verify Success", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(FingerTouchActivity.this, ViewInfoAdminActivity.class); // todo change to view page citizen
-                startActivity(intent);
+                Intent viewInfoCitizenActivity = new Intent(FingerTouchActivity.this, ViewInfoCitizenActivity.class);
+                viewInfoCitizenActivity.putExtra("role", role);
+                viewInfoCitizenActivity.putExtra("username", username);
+                startActivity(viewInfoCitizenActivity);
             }
 
             @Override

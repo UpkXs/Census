@@ -19,7 +19,6 @@ import com.example.census.enums.Role;
 import com.example.census.model.Stationary;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.token.TokenActivity;
-import com.example.census.view.ViewInfoAdminActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -85,8 +84,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         } else if (role.label.equals(Role.STATIONARY.label)) {
             Stationary stationary = getStationary(username);
-            System.out.println(stationary.getStationary_username() + " asasasas");
-            System.out.println(stationary.getStationary_password() + " aasasasasa");
+            System.out.println("3Xt5oz5o :: username : " + stationary.getStationary_username());
+            System.out.println("LP3efY66 :: password : " + stationary.getStationary_password());
             if (stationary.getStationary_username() == null) {
                 System.out.println("isNull!");
                 toastShow("Stationary does not found!");
@@ -104,6 +103,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         } else if (role.label.equals(Role.CONTROLLER.label)) {
             Controller controller = getController(username);
+            System.out.println("GniLEb0j :: username : " + controller.getController_username());
+            System.out.println("z0xrUVA6 :: password : " + controller.getController_password());
+            System.out.println("TIov04Cr :: hashedPassword : " + passwordToHash.doHash(controller.getController_password()));
             if (controller.getController_username() == null) {
                 System.out.println("isNull!");
                 toastShow("Controller does not found!");

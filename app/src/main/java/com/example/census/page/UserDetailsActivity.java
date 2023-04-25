@@ -25,6 +25,6 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         System.out.println("3s1RmrO3 :: UserDetailsActivity");
         System.out.println("s882d7Sj :: role : " + role);
-        System.out.println("f9rz172F :: username" + username);
+        System.out.println("f9rz172F :: username " + username);
     }
 }

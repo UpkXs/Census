@@ -49,7 +49,7 @@ public class ChangeDataStationaryActivity extends AppCompatActivity {
 
         btnLogOut = findViewById(R.id.btnLogOut);
 
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+        btnLogOut.setOnClickListener(new View.OnClickListener() { //todo go to view stationary page
             @Override
             public void onClick(View view) {
                 Intent mainActivity = new Intent(ChangeDataStationaryActivity.this, MainActivity.class);
