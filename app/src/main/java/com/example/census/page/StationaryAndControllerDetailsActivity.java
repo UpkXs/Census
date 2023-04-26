@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -129,11 +128,13 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_item, regionList);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            adapter.setAutofillOptions(regionName.getRegion_name()); // todo check default selected region name in DB
-        }
 
         autoCompleteTextView.setAdapter(adapter);
+
+        System.out.println("pPCL0dUg :: regionName.getRegion_id() : " + regionName.getRegion_id());
+        System.out.println("LA5WPzT1 :: regionName.getRegion_name() : " + regionName.getRegion_name());
+        // Set the default selected name
+        autoCompleteTextView.setText(regionName.getRegion_name()); // todo aro default selected region name
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -157,31 +158,22 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
         });
     }
 
-    public String getNewHashedPassword() { // todo when old password is incorrect do something, and fix visibility
+    public String getNewHashedPassword() {
         editTxtOldPassword = findViewById(R.id.oldPassword);
         editTxtNewPassword = findViewById(R.id.newPassword);
-        editTxtNewPassword.setVisibility(View.GONE);
 
         String oldPassword = editTxtOldPassword.getText().toString().trim();
-        System.out.println("2JA0WSG0 :: oldPassword : " + oldPassword);
 
         PasswordToHash passwordToHash = new PasswordToHash();
         String hashedPassword = passwordToHash.doHash(oldPassword);
-        System.out.println("wEe2VkC4 :: hashedPassword : " + hashedPassword);
 
         String newHashedPassword = "";
         if (role.label.equals(Role.STATIONARY.label) && stationaryDAO.getStationary_password().equals(hashedPassword)) {
-            editTxtNewPassword.setVisibility(View.VISIBLE);
             String newPassword = editTxtNewPassword.getText().toString().trim();
             newHashedPassword = passwordToHash.doHash(newPassword);
-            System.out.println("BT2Y6x50 :: newPassword : " + newPassword);
-            System.out.println("14ayUM3y :: newHashedPassword : " + newHashedPassword);
         } else if (role.label.equals(Role.CONTROLLER.label) && controllerDAO.getController_password().equals(hashedPassword)) {
-            editTxtNewPassword.setVisibility(View.VISIBLE);
             String newPassword = editTxtNewPassword.getText().toString().trim();
             newHashedPassword = passwordToHash.doHash(newPassword);
-            System.out.println("9vBtA07d :: newPassword : " + newPassword);
-            System.out.println("MkH1JVO6 :: newHashedPassword : " + newHashedPassword);
         }
 
         return newHashedPassword;
@@ -200,7 +192,14 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
             System.out.println("7u33mu54 :: newHashedPassword : " + newHashedPassword);
             stationaryDAO.setStationary_password(newHashedPassword);
 
-            updateStationary(stationaryDAO);
+            if (stationaryDAO.getStationary_id() == 0 ||
+                    stationaryDAO.getStationary_username().isEmpty() ||
+                    stationaryDAO.getStationary_password().isEmpty() ||
+                    stationaryDAO.getRegion_id() == 0) {
+                toastShow("Some field is empty. Please fill correct and not empty info.");
+            } else {
+                updateStationary(stationaryDAO);
+            }
 
         } else if (role.label.equals(Role.CONTROLLER.label)) {
             ControllerDAO controllerDAO = new ControllerDAO();
@@ -214,7 +213,15 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
             System.out.println("sOYfLAKZ :: newHashedPassword : " + newHashedPassword);
             controllerDAO.setController_password(newHashedPassword);
 
-            updateController(controllerDAO);
+            if (controllerDAO.getController_id() == 0 ||
+                    controllerDAO.getController_username().isEmpty() ||
+                    controllerDAO.getController_password().isEmpty() ||
+                    controllerDAO.getRegion_id() == 0) {
+                toastShow("Some field is empty. Please fill correct and not empty info.");
+            } else {
+                updateController(controllerDAO);
+            }
+
         }
     }
 
