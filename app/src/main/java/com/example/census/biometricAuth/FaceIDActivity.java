@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.census.R;
+import com.example.census.enums.Action;
 import com.example.census.enums.Role;
 import com.example.census.token.TokenActivity;
 
@@ -23,7 +24,8 @@ import java.util.concurrent.Executor;
 
 public class FaceIDActivity extends AppCompatActivity {
 
-    private Role role;
+    private Role   role;
+    private Action action;
     private String username;
 
     @Override
@@ -35,6 +37,7 @@ public class FaceIDActivity extends AppCompatActivity {
         if (extras != null) {
             role = (Role) extras.get("role");
             username = (String) extras.get("username");
+            action = (Action) extras.get("action");
         }
 
         TextView msg_txt = findViewById(R.id.txt_msg);
@@ -44,6 +47,7 @@ public class FaceIDActivity extends AppCompatActivity {
         Intent tokenActivity = new Intent(this, TokenActivity.class);
         tokenActivity.putExtra("role", role);
         tokenActivity.putExtra("username", username);
+        tokenActivity.putExtra("action", action);
         switch (biometricManager.canAuthenticate()) {
             case BiometricManager.BIOMETRIC_SUCCESS:
                 msg_txt.setText("You can use the fingerprint sensor to login");
@@ -94,6 +98,7 @@ public class FaceIDActivity extends AppCompatActivity {
                 Intent fingerTouchActivity = new Intent(FaceIDActivity.this, FingerTouchActivity.class);
                 fingerTouchActivity.putExtra("role", role);
                 fingerTouchActivity.putExtra("username", username);
+                fingerTouchActivity.putExtra("action", action);
                 startActivity(fingerTouchActivity);
             }
 

@@ -4,7 +4,9 @@ public enum Action {
     VIEW("View"),
     DELETE("Delete"),
     CHANGE("Change"),
-    CHANGE_ADMIN("Change Admin");
+    CHANGE_ADMIN("Change Admin"),
+    LOGIN("Login"),
+    REGISTER("Register");
 
     public final String label;
 

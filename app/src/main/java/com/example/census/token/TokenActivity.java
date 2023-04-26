@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.census.R;
+import com.example.census.enums.Action;
 import com.example.census.enums.Role;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -22,6 +23,7 @@ public class TokenActivity extends AppCompatActivity {
 
     private Role     role;
     private String   username;
+    private Action   action;
     private int      code;
     private EditText inputMobile;
     private Button   btnGetToken;
@@ -38,6 +40,7 @@ public class TokenActivity extends AppCompatActivity {
         if (extras != null) {
             username = (String) extras.get("username");
             role = (Role) extras.get("role");
+            action = (Action) extras.get("action");
         }
 
         inputMobile = findViewById(R.id.inputMobile);
@@ -81,6 +84,7 @@ public class TokenActivity extends AppCompatActivity {
         Intent verifyTokenActivity = new Intent(getApplicationContext(), VerifyTokenActivity.class);
         verifyTokenActivity.putExtra("role", role);
         verifyTokenActivity.putExtra("username", username);
+        verifyTokenActivity.putExtra("action", action);
         verifyTokenActivity.putExtra("mobile", inputMobile.getText().toString());
         verifyTokenActivity.putExtra("code", code);
         startActivity(verifyTokenActivity);

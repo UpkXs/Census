@@ -17,7 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.census.R;
+import com.example.census.enums.Action;
 import com.example.census.enums.Role;
+import com.example.census.interview.OnlineInterviewActivity;
 import com.example.census.view.ViewInfoAdminActivity;
 import com.example.census.view.ViewInfoCitizenActivity;
 import com.example.census.view.ViewInfoControllerActivity;
@@ -29,6 +31,7 @@ public class VerifyTokenActivity extends AppCompatActivity {
 
     private Role     role;
     private String   username;
+    private Action   action;
     private String   mobile;
     private int      code;
     private EditText inputCode1, inputCode2, inputCode3, inputCode4, inputCode5, inputCode6;
@@ -46,6 +49,7 @@ public class VerifyTokenActivity extends AppCompatActivity {
         if (extras != null) {
             role     = (Role) extras.get("role");
             username = (String) extras.get("username");
+            action = (Action) extras.get("action");
             mobile   = (String) extras.get("mobile");
             code     = (int) extras.get("code");
         }
@@ -102,11 +106,18 @@ public class VerifyTokenActivity extends AppCompatActivity {
                         viewInfoControllerActivity.putExtra("role", role);
                         viewInfoControllerActivity.putExtra("username", username);
                         startActivity(viewInfoControllerActivity);
-                    } else if (role.label.equals(Role.CITIZEN.label)) {
+                    } else if (role.label.equals(Role.CITIZEN.label) && action.label.equals(Action.LOGIN.label)) {
                         Intent viewInfoCitizenActivity = new Intent(getApplicationContext(), ViewInfoCitizenActivity.class);
                         viewInfoCitizenActivity.putExtra("role", role);
+                        viewInfoCitizenActivity.putExtra("action", action);
                         viewInfoCitizenActivity.putExtra("username", username);
                         startActivity(viewInfoCitizenActivity);
+                    } else if (role.label.equals(Role.CITIZEN.label) && action.label.equals(Action.REGISTER.label)) {
+                        Intent onlineInterviewActivity = new Intent(getApplicationContext(), OnlineInterviewActivity.class);
+                        onlineInterviewActivity.putExtra("role", role);
+                        onlineInterviewActivity.putExtra("action", action);
+                        onlineInterviewActivity.putExtra("username", username);
+                        startActivity(onlineInterviewActivity);
                     }
                 } else {
                     Toast.makeText(VerifyTokenActivity.this, "The verification code entered was invalid", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.census.view;
+package com.example.census.interview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import com.example.census.R;
 import com.example.census.enums.Action;
 import com.example.census.enums.Role;
 
-public class ViewInfoCitizenActivity extends AppCompatActivity {
+public class OnlineInterviewActivity extends AppCompatActivity {
 
     private Role   role;
     private Action action;
@@ -17,7 +17,7 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_info_citizen);
+        setContentView(R.layout.activity_online_interview);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -25,9 +25,9 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
             action = (Action) extras.get("action");
             username = (String) extras.get("username");
 
-            System.out.println("CbBzxWws :: role : " + role);
-            System.out.println("cAhzA7DS :: action : " + action);
-            System.out.println("22p97FpC :: username : " + username);
+            System.out.println("Os1ikyI0 :: role : " + role);
+            System.out.println("DO55Q48v :: action : " + action);
+            System.out.println("Iq22nZ65 :: username : " + username);
         }
     }
 }

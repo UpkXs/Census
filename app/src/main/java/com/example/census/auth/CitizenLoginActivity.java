@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.census.R;
 import com.example.census.database.PasswordToHash;
+import com.example.census.enums.Action;
 import com.example.census.model.CitizenLogin;
 import com.example.census.enums.Role;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
@@ -22,8 +23,9 @@ import com.example.census.token.TokenActivity;
 
 public class CitizenLoginActivity extends AppCompatActivity {
 
-    private final Role role = Role.CITIZEN;
-    private     CitizenLogin     citizenLogin;
+    private final Role         role = Role.CITIZEN;
+    private final Action       action = Action.LOGIN;
+    private       CitizenLogin citizenLogin;
 
     private MyDatabaseHelper myDB;
 
@@ -82,6 +84,7 @@ public class CitizenLoginActivity extends AppCompatActivity {
             Intent tokenActivity = new Intent(this, TokenActivity.class);
             tokenActivity.putExtra("username", username.getText().toString());
             tokenActivity.putExtra("role", role);
+            tokenActivity.putExtra("action", action);
             startActivity(tokenActivity);
         } else {
             System.out.println("isNull!");

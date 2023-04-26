@@ -16,16 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.census.R;
+import com.example.census.enums.Action;
 import com.example.census.enums.Role;
+import com.example.census.interview.OnlineInterviewActivity;
 import com.example.census.token.TokenActivity;
-import com.example.census.view.ViewInfoAdminActivity;
-import com.example.census.view.ViewInfoCitizenActivity;
 
 import java.util.concurrent.Executor;
 
 public class FingerTouchActivity extends AppCompatActivity {
 
-    private Role role;
+    private Role   role;
+    private Action action;
     private String username;
 
     @Override
@@ -37,6 +38,7 @@ public class FingerTouchActivity extends AppCompatActivity {
         if (extras != null) {
             role = (Role) extras.get("role");
             username = (String) extras.get("username");
+            action = (Action) extras.get("action");
         }
 
         TextView msg_txt = findViewById(R.id.txt_msg);
@@ -46,6 +48,7 @@ public class FingerTouchActivity extends AppCompatActivity {
         Intent tokenActivity = new Intent(this, TokenActivity.class);
         tokenActivity.putExtra("role", role);
         tokenActivity.putExtra("username", username);
+        tokenActivity.putExtra("action", action);
         switch (biometricManager.canAuthenticate()) {
             case BiometricManager.BIOMETRIC_SUCCESS:
                 msg_txt.setText("You can use the fingerprint sensor to login");
@@ -93,10 +96,10 @@ public class FingerTouchActivity extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(), "Verify Success", Toast.LENGTH_SHORT).show();
 
-                Intent viewInfoCitizenActivity = new Intent(FingerTouchActivity.this, ViewInfoCitizenActivity.class);
-                viewInfoCitizenActivity.putExtra("role", role);
-                viewInfoCitizenActivity.putExtra("username", username);
-                startActivity(viewInfoCitizenActivity);
+                Intent onlineInterviewActivity = new Intent(FingerTouchActivity.this, OnlineInterviewActivity.class);
+                onlineInterviewActivity.putExtra("role", role);
+                onlineInterviewActivity.putExtra("username", username);
+                startActivity(onlineInterviewActivity);
             }
 
             @Override

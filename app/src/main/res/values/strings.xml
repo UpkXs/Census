@@ -60,6 +60,12 @@
     <string name="old_password">Old password</string>
     <string name="new_password_with_double_dot">New Password:</string>
     <string name="new_password">New Password</string>
+    <string name="citizen_information_page">Citizen information page</string>
+    <string name="full_name_with_double_dot">Full Name:</string>
+    <string name="full_name">Full Name</string>
+    <string name="tinWithDoubleDot">TIN:</string>
+    <string name="tin">TIN</string>
+    <string name="go_to_view_controller_page">Go to View Controller Page</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

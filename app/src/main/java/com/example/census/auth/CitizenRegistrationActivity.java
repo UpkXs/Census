@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.census.R;
 import com.example.census.biometricAuth.FaceIDActivity;
 import com.example.census.database.PasswordToHash;
+import com.example.census.enums.Action;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Region;
@@ -31,8 +32,9 @@ import java.util.List;
 
 public class CitizenRegistrationActivity extends AppCompatActivity {
 
-    private final Role role = Role.CITIZEN;
-    private Region region;
+    private final Role   role = Role.CITIZEN;
+    private final Action action = Action.REGISTER;
+    private       Region region;
     private Citizen citizen;
     private CitizenLogin citizenLogin;
 
@@ -128,6 +130,7 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
 
         Intent faceIDActivity = new Intent(this, FaceIDActivity.class);
         faceIDActivity.putExtra("role", role);
+        faceIDActivity.putExtra("action", action);
         faceIDActivity.putExtra("username", citizenLogin.getUsername());
         startActivity(faceIDActivity);
     }

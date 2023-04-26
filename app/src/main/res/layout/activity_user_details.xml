@@ -4,6 +4,151 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:layout_gravity="center"
     tools:context=".page.UserDetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/poppinsregular"
+            android:gravity="center"
+            android:text="@string/citizen_information_page"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/full_name_with_double_dot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/full_name"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usernameWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tinWithDoubleDot"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/tin"
+                android:textColor="@color/second_main_color"
+                android:textColorHint="@color/second_main_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnGoToViewControllerPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsmediumitalic"
+            android:text="@string/go_to_view_controller_page"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginTop="70dp"
+            app:backgroundTint="@color/white" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
