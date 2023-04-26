@@ -186,8 +186,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public long addRegion() {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
 
+        db.execSQL("DROP TABLE IF EXISTS " + REGION_TABLE_NAME);
+
+        String createTableRegion = "CREATE TABLE " + REGION_TABLE_NAME +
+                " (" + REGION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                REGION_NAME + " TEXT);";
+        db.execSQL(createTableRegion);
+
+        ContentValues cv = new ContentValues();
         for (String region: regionsList) {
             cv.put(REGION_NAME, region);
             long result = db.insert(REGION_TABLE_NAME, null, cv);
