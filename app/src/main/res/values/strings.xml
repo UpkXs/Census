@@ -66,6 +66,10 @@
     <string name="tinWithDoubleDot">TIN:</string>
     <string name="tin">TIN</string>
     <string name="go_to_view_controller_page">Go to View Controller Page</string>
+    <string name="if_you_are_ready_please_click_on_the_button_below_to_take_the_census">If you are ready, please click on the button below to take the census</string>
+    <string name="start_an_online_interview">Start an online interview</string>
+    <string name="online_interview_first_part">Online Interview First Part</string>
+    <string name="go_to_the_next_part">Go to the Next Part</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

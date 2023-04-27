@@ -77,7 +77,7 @@ public class VerifyTokenActivity extends AppCompatActivity {
                 || inputCode4.getText().toString().trim().isEmpty()
                 || inputCode5.getText().toString().trim().isEmpty()
                 || inputCode6.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(VerifyTokenActivity.this, "Please enter valid code", Toast.LENGTH_LONG).show();
+                    Toast.makeText(VerifyTokenActivity.this, "Please enter valid code", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String inputCode = inputCode1.getText().toString() +

@@ -75,7 +75,7 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String selectedRegion = adapterView.getItemAtPosition(i).toString();
                     region = getRegion(selectedRegion);
-                    Toast.makeText(CitizenRegistrationActivity.this, "Selected region: " + region.getRegion_name(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CitizenRegistrationActivity.this, "Selected region: " + region.getRegion_name(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -202,7 +202,7 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
 
     public void toastShow(CharSequence text) {
         Context context = getApplicationContext();
-        int duration = Toast.LENGTH_LONG;
+        int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();

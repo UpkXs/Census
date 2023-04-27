@@ -133,7 +133,7 @@ public class FaceIDActivity extends AppCompatActivity {
 
     public void toastShow(CharSequence text) {
         Context context = getApplicationContext();
-        int duration = Toast.LENGTH_LONG;
+        int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
