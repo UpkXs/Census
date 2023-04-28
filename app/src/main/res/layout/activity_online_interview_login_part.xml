@@ -22,7 +22,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
-            android:fontFamily="@font/poppinsregular"
+            android:fontFamily="@font/poppinsbold"
             android:gravity="center"
             android:text="@string/online_interview_first_part"
             android:textColor="@color/black"
@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsbold"
+                android:fontFamily="@font/poppinsregular"
                 android:text="@string/tinWithDoubleDot"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsbold"
+                android:fontFamily="@font/poppinsregular"
                 android:text="@string/full_name_with_double_dot"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"
@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsbold"
+                android:fontFamily="@font/poppinsregular"
                 android:text="@string/regionWithDoubleDot"
                 android:textAllCaps="false"
                 android:textColor="@color/second_main_color"

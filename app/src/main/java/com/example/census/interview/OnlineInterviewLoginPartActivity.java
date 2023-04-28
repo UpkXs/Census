@@ -3,6 +3,7 @@ package com.example.census.interview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +37,7 @@ public class OnlineInterviewLoginPartActivity extends AppCompatActivity {
         if (extras != null) {
             username = (String) extras.get("username");
 
-            System.out.println("bkE5lAcB :: username : " + username);
+            System.out.println("9Nj8lXYc :: username : " + username);
         }
 
         myDB = new MyDatabaseHelper(OnlineInterviewLoginPartActivity.this);
@@ -102,10 +103,14 @@ public class OnlineInterviewLoginPartActivity extends AppCompatActivity {
 
         long result = myDB.updateCitizen(citizenUsernameId, citizenTIN, citizenFullName, citizenRegionId);
         if (result == -1) {
+            System.out.println("PFk2h3ZF :: First part of online interview not correctly passed");
             toastShow("First part of online interview not correctly passed");
         } else {
+            System.out.println("vmw3jSl5 :: First part of online interview passed successfully");
             toastShow("First part of online interview passed successfully");
-            // todo start second part of online interview
+            Intent onlineInterviewHouseholdPartActivity = new Intent(OnlineInterviewLoginPartActivity.this, OnlineInterviewHouseholdPartActivity.class);
+            onlineInterviewHouseholdPartActivity.putExtra("username", username);
+            startActivity(onlineInterviewHouseholdPartActivity);
         }
     }
 
