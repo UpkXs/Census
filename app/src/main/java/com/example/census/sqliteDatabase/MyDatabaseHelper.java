@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Controller;
+import com.example.census.model.Household;
+import com.example.census.model.HouseholdType;
+import com.example.census.model.HouseholdTypee;
 import com.example.census.model.Stationary;
 import com.example.census.modelDAO.ControllerDAO;
 import com.example.census.modelDAO.StationaryDAO;
@@ -76,6 +79,35 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     //endregion Region table
 
+    //region Household table
+    private static final String HOUSEHOLD_TABLE_NAME = "household";
+    private static final String HOUSEHOLD_ID = "_id";
+    private static final String HOUSEHOLD_CITIZEN_TIN = "citizen_tin";
+    private static final String HOUSEHOLD_ADDRESS = "household_address";
+    private static final String HOUSEHOLD_TYPE = "household_type";
+    private static final String HOUSEHOLD_REGION = "region";
+    private static final String HOUSEHOLD_YEAR = "household_year";
+    private static final String HOUSEHOLD_FLOOR = "household_floor";
+    private static final String HOUSEHOLD_MATERIAL = "household_material";
+    private static final String HOUSEHOLD_LANDSCAPE = "household_landscape";
+    private static final String HOUSEHOLD_SIZE = "household_size";
+    private static final String HOUSEHOLD_WO_SIZE = "household_wo_size";
+    private static final String HOUSEHOLD_ROOM = "household_room";
+    private static final String HOUSEHOLD_OWNER = "household_owner";
+    //end region Household table
+
+    //region HouseholdType table
+    private static final String HOUSEHOLD_TYPE_TABLE_NAME = "household_type";
+    private static final String HOUSEHOLD_TYPE_ID = "_id";
+    private static final String HOUSEHOLD_TYPE_NAME = "household_type_name";
+    private static final String HOUSEHOLD_TYPE_TYPE = "household_type_type";
+    //end region HouseholdType table
+
+    //region HouseholdTypee table
+    private static final String HOUSEHOLD_TYPEE_TABLE_NAME = "household_typee";
+    private static final String HOUSEHOLD_TYPEE_ID = "_id";
+    private static final String HOUSEHOLD_TYPEE_NAME = "household_typee_name";
+    //end region HouseholdTypee table
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -122,6 +154,33 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 " (" + REGION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                        REGION_NAME + " TEXT);";
         db.execSQL(createTableRegion);
+
+        String createTableHousehold = "CREATE TABLE " + HOUSEHOLD_TABLE_NAME +
+                " (" + HOUSEHOLD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                HOUSEHOLD_CITIZEN_TIN + " INTEGER, " +
+                HOUSEHOLD_ADDRESS + " TEXT, " +
+                HOUSEHOLD_TYPE + " INTEGER, " +
+                HOUSEHOLD_REGION + " INTEGER, " +
+                HOUSEHOLD_YEAR + " INTEGER, " +
+                HOUSEHOLD_FLOOR + " INTEGER, " +
+                HOUSEHOLD_MATERIAL + " TEXT, " +
+                HOUSEHOLD_LANDSCAPE + " TEXT, " +
+                HOUSEHOLD_SIZE + " INTEGER, " +
+                HOUSEHOLD_WO_SIZE + " INTEGER, " +
+                HOUSEHOLD_ROOM + " INTEGER, " +
+                HOUSEHOLD_OWNER + " TEXT);";
+        db.execSQL(createTableHousehold);
+
+        String createTableHouseholdType = "CREATE TABLE " + HOUSEHOLD_TYPE_TABLE_NAME +
+                " (" + HOUSEHOLD_TYPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                HOUSEHOLD_TYPE_NAME + " TEXT, " +
+                HOUSEHOLD_TYPE_TYPE + " INTEGER);";
+        db.execSQL(createTableHouseholdType);
+
+        String createTableHouseholdTypee = "CREATE TABLE " + HOUSEHOLD_TYPEE_TABLE_NAME +
+                " (" + HOUSEHOLD_TYPEE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                HOUSEHOLD_TYPEE_NAME + " TEXT);";
+        db.execSQL(createTableHouseholdTypee);
     }
 
     @Override
@@ -131,6 +190,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CITIZEN_LOGIN_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + CITIZEN_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + REGION_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + HOUSEHOLD_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + HOUSEHOLD_TYPE_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + HOUSEHOLD_TYPEE_TABLE_NAME);
         onCreate(db);
     }
 
@@ -204,6 +266,48 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
 
         return db.insert(REGION_TABLE_NAME, null, cv);
+    }
+
+    public long addHousehold(Household household) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(HOUSEHOLD_ID, household.getId());
+        cv.put(HOUSEHOLD_CITIZEN_TIN, household.getCitizen_tin());
+        cv.put(HOUSEHOLD_ADDRESS, household.getAddress());
+        cv.put(HOUSEHOLD_TYPE, household.getType());
+        cv.put(HOUSEHOLD_REGION, household.getRegion());
+        cv.put(HOUSEHOLD_YEAR, household.getYear());
+        cv.put(HOUSEHOLD_FLOOR, household.getFloor());
+        cv.put(HOUSEHOLD_MATERIAL, household.getMaterial());
+        cv.put(HOUSEHOLD_LANDSCAPE, household.getLandscape());
+        cv.put(HOUSEHOLD_SIZE, household.getSize());
+        cv.put(HOUSEHOLD_WO_SIZE, household.getWo_size());
+        cv.put(HOUSEHOLD_ROOM, household.getRoom());
+        cv.put(HOUSEHOLD_OWNER, household.getOwner());
+
+        return db.insert(HOUSEHOLD_TABLE_NAME, null, cv);
+    }
+
+    public long addHouseholdType(HouseholdType householdType) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(HOUSEHOLD_TYPE_ID, householdType.getId());
+        cv.put(HOUSEHOLD_TYPE_NAME, householdType.getName());
+        cv.put(HOUSEHOLD_TYPE_TYPE, householdType.getType());
+
+        return db.insert(HOUSEHOLD_TYPE_TABLE_NAME, null, cv);
+    }
+
+    public long addHouseholdTypee(HouseholdTypee householdTypee) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(HOUSEHOLD_TYPEE_ID, householdTypee.getId());
+        cv.put(HOUSEHOLD_TYPEE_NAME, householdTypee.getName());
+
+        return db.insert(HOUSEHOLD_TYPEE_TABLE_NAME, null, cv);
     }
 
     public Cursor selectFromTable(String sql) {
