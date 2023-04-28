@@ -240,4 +240,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         return db.update(CONTROLLER_TABLE_NAME, cv, "_id=?", new String[] {String.valueOf(controllerDAO.getController_id())});
     }
+
+    public long updateCitizen(int usernameId, String citizenTIN, String citizenFullName, int citizenRegionId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CITIZEN_TIN, citizenTIN);
+        cv.put(CITIZEN_FULL_NAME, citizenFullName);
+        cv.put(CITIZEN_REGION_ID, citizenRegionId);
+
+        return db.update(CITIZEN_TABLE_NAME, cv, "username_id=?", new String[]{String.valueOf(usernameId)});
+    }
 }
