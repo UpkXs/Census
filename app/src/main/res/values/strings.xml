@@ -70,6 +70,11 @@
     <string name="start_an_online_interview">Start an online interview</string>
     <string name="online_interview_first_part">Online Interview First Part</string>
     <string name="go_to_the_next_part">Go to the Next Part</string>
+    <string name="online_interview_second_part">Online Interview Second Part</string>
+    <string name="question_body">Question Body</string>
+    <string name="question_id_with_dot">Question ID.</string>
+    <string name="question_head">Question Head</string>
+    <string name="individual_identification_number">Individual Identification Number</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

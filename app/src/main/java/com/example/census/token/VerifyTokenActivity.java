@@ -135,7 +135,7 @@ public class VerifyTokenActivity extends AppCompatActivity {
                     manager.createNotificationChannel(channel);
                 }
 
-                code = ThreadLocalRandom.current().nextInt(100000, 1000000); // get code(6 digit code)
+                code = ThreadLocalRandom.current().nextInt(100000, 1000000); // get code(6 digit code) // todo aro thread security
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(VerifyTokenActivity.this, "myCh")
                         .setSmallIcon(android.R.drawable.stat_notify_sync)

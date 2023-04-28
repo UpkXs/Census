@@ -66,7 +66,9 @@ public class OnlineInterviewLoginPartActivity extends AppCompatActivity {
             return;
         }
 
-        editTxtTin.setText(loginPartDAO.getTin());
+        if (loginPartDAO.getTin() != 0) {
+            editTxtTin.setText(String.valueOf(loginPartDAO.getTin()));
+        }
         editTxtFullName.setText(loginPartDAO.getFullName());
         editTxtRegion.setText(loginPartDAO.getRegionName());
 
@@ -150,9 +152,9 @@ public class OnlineInterviewLoginPartActivity extends AppCompatActivity {
 
     private LoginPartDAO getLoginPartDAOInfo(int usernameId) {
         Cursor cursor = myDB.selectFromTable("select citizen_tin, citizen_fullName, region_name " +
-                "from citizen inner join region " +
-                "where citizen.username_id == " + usernameId +
-                "and citizen.region_id == region._id");
+                "from citizen inner join region" +
+                " where citizen.username_id == " + usernameId +
+                " and citizen.region_id == region._id");
         LoginPartDAO loginPartDAO = new LoginPartDAO();
         if (cursor.getCount() == 0) {
             return loginPartDAO;

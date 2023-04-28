@@ -81,7 +81,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private CitizenDAO getCitizenDAOInfo(String username) {
         Cursor cursor = myDB.selectFromTable("select citizen_fullName, username, citizen_tin " +
                                                      "from citizen inner join citizen_login " +
-                                                         "where citizen_login.username == '" + username + "'" +
+                                                         "where citizen_login.username == '" + username + "' " +
                                                              "and citizen.username_id == citizen_login._id");
         CitizenDAO citizenDAO = new CitizenDAO();
         if (cursor.getCount() == 0) {
