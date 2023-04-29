@@ -75,6 +75,7 @@
     <string name="question_id_with_dot">Question ID.</string>
     <string name="question_head">Question Head</string>
     <string name="individual_identification_number">Individual Identification Number</string>
+    <string name="enter_the_answer">enter the answer</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

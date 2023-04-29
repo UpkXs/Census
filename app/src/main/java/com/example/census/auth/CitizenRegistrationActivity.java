@@ -21,6 +21,7 @@ import com.example.census.R;
 import com.example.census.biometricAuth.FaceIDActivity;
 import com.example.census.database.PasswordToHash;
 import com.example.census.enums.Action;
+import com.example.census.interview.OnlineInterviewActivity;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Region;
@@ -128,11 +129,14 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         rows = myDB.addCitizen(citizen);
         citizen = getCitizen(citizen.getUsername_id());
 
-        Intent faceIDActivity = new Intent(this, FaceIDActivity.class);
-        faceIDActivity.putExtra("role", role);
-        faceIDActivity.putExtra("action", action);
-        faceIDActivity.putExtra("username", citizenLogin.getUsername());
-        startActivity(faceIDActivity);
+//        Intent faceIDActivity = new Intent(this, FaceIDActivity.class);
+//        faceIDActivity.putExtra("role", role);
+//        faceIDActivity.putExtra("action", action);
+//        faceIDActivity.putExtra("username", citizenLogin.getUsername());
+//        startActivity(faceIDActivity);
+        Intent todo = new Intent(getApplicationContext(), OnlineInterviewActivity.class); // todo aro remove
+        todo.putExtra("username", citizenLogin.getUsername());
+        startActivity(todo);
     }
 
     public void goToLoginActivity(View v) {

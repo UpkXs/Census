@@ -272,7 +272,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(HOUSEHOLD_ID, household.getId());
         cv.put(HOUSEHOLD_CITIZEN_TIN, household.getCitizen_tin());
         cv.put(HOUSEHOLD_ADDRESS, household.getAddress());
         cv.put(HOUSEHOLD_TYPE, household.getType());
@@ -293,7 +292,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(HOUSEHOLD_TYPE_ID, householdType.getId());
         cv.put(HOUSEHOLD_TYPE_NAME, householdType.getName());
         cv.put(HOUSEHOLD_TYPE_TYPE, householdType.getType());
 
@@ -304,7 +302,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(HOUSEHOLD_TYPEE_ID, householdTypee.getId());
         cv.put(HOUSEHOLD_TYPEE_NAME, householdTypee.getName());
 
         return db.insert(HOUSEHOLD_TYPEE_TABLE_NAME, null, cv);

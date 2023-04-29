@@ -20,6 +20,9 @@
         tools:node="merge"
         tools:targetApi="31">
         <activity
+            android:name=".interview.OnlineInterviewCensusFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".interview.OnlineInterviewHouseholdPartActivity"
             android:exported="false">
             <meta-data

@@ -6,14 +6,16 @@ public class Question {
     private int        id;
     private String     question;
     private AnswerType answerType;
+    private String answer;
 
     public Question() {
     }
 
-    public Question(int id, String question, AnswerType answerType) {
+    public Question(int id, String question, AnswerType answerType, String answer) {
         this.id         = id;
         this.question   = question;
         this.answerType = answerType;
+        this.answer = answer;
     }
 
     public int getId() {
@@ -38,5 +40,13 @@ public class Question {
 
     public void setAnswerType(AnswerType answerType) {
         this.answerType = answerType;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }
