@@ -2,6 +2,7 @@ package com.example.census.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String userName = mUserNames.get(position);
-        holder.userLink.setText(userName); // todo add underline
+        holder.userLink.setText(userName);
+        holder.userLink.setPaintFlags(holder.userLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         holder.userLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

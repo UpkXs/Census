@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.census.model.CensusForm;
 import com.example.census.model.Citizen;
 import com.example.census.model.CitizenLogin;
 import com.example.census.model.Controller;
@@ -109,6 +110,34 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String HOUSEHOLD_TYPEE_NAME = "household_typee_name";
     //end region HouseholdTypee table
 
+    //region CensusForm table
+    private static final String CENSUS_FORM_TABLE_NAME = "census_form";
+    private static final String CENSUS_FORM_ID = "_id";
+    private static final String CENSUS_FORM_CITIZEN_TIN = "citizen_tin";
+    private static final String CENSUS_FORM_AGE = "citizen_age";
+    private static final String CENSUS_FORM_NUMBER = "citizen_number";
+    private static final String CENSUS_FORM_SEX = "citizen_sex";
+    private static final String CENSUS_FORM_BIRTH = "citizen_birth";
+    private static final String CENSUS_FORM_OWNER_REL = "citizen_owner_rel";
+    private static final String CENSUS_FORM_CITIZENSHIP = "citizen_citizenship";
+    private static final String CENSUS_FORM_LOCATION = "citizen_location";
+    private static final String CENSUS_FORM_NATION = "citizen_nation";
+    private static final String CENSUS_FORM_LANGUAGE = "citizen_language";
+    private static final String CENSUS_FORM_OLANGUAGE = "citizen_olanguage";
+    private static final String CENSUS_FORM_EDUCATION = "citizen_education";
+    private static final String CENSUS_FORM_LIVE_PERIOD = "citizen_live_period";
+    private static final String CENSUS_FORM_OLIVE_PERIOD = "citizen_olive_period";
+    private static final String CENSUS_FORM_STATUS = "citizen_status";
+    private static final String CENSUS_FORM_MARRIAGE_YEAR = "citizen_marriage_year";
+    private static final String CENSUS_FORM_MARRIAGE_SUM = "citizen_marriage_sum";
+    private static final String CENSUS_FORM_JOB_PERIOD = "citizen_job_period";
+    private static final String CENSUS_FORM_JOB_SPHERE = "citizen_job_sphere";
+    private static final String CENSUS_FORM_JOB_LOCATION = "citizen_job_location";
+    private static final String CENSUS_FORM_PARTTIME = "citizen_parttime";
+    private static final String CENSUS_FORM_INCOME_SUM_TYPE = "citizen_income_sum_type";
+
+    //end region CensusForm table
+
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -181,6 +210,32 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 " (" + HOUSEHOLD_TYPEE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 HOUSEHOLD_TYPEE_NAME + " TEXT);";
         db.execSQL(createTableHouseholdTypee);
+
+        String createTableCensusForm = "CREATE TABLE " + CENSUS_FORM_TABLE_NAME +
+                " (" + CENSUS_FORM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                CENSUS_FORM_CITIZEN_TIN + " INTEGER, " +
+                CENSUS_FORM_AGE + " INTEGER, " +
+                CENSUS_FORM_NUMBER + " INTEGER, " +
+                CENSUS_FORM_SEX + " TEXT, " +
+                CENSUS_FORM_BIRTH + " TEXT, " +
+                CENSUS_FORM_OWNER_REL + " TEXT, " +
+                CENSUS_FORM_CITIZENSHIP + " TEXT, " +
+                CENSUS_FORM_LOCATION + " TEXT, " +
+                CENSUS_FORM_NATION + " TEXT, " +
+                CENSUS_FORM_LANGUAGE + " TEXT, " +
+                CENSUS_FORM_OLANGUAGE + " TEXT, " +
+                CENSUS_FORM_EDUCATION + " TEXT, " +
+                CENSUS_FORM_LIVE_PERIOD + " INTEGER, " +
+                CENSUS_FORM_OLIVE_PERIOD + " INTEGER, " +
+                CENSUS_FORM_STATUS + " TEXT, " +
+                CENSUS_FORM_MARRIAGE_YEAR + " INTEGER, " +
+                CENSUS_FORM_MARRIAGE_SUM + " INTEGER, " +
+                CENSUS_FORM_JOB_PERIOD + " INTEGER, " +
+                CENSUS_FORM_JOB_SPHERE + " TEXT, " +
+                CENSUS_FORM_JOB_LOCATION + " TEXT, " +
+                CENSUS_FORM_PARTTIME + " TEXT, " +
+                CENSUS_FORM_INCOME_SUM_TYPE + "  TEXT);";
+        db.execSQL(createTableCensusForm);
     }
 
     @Override
@@ -193,6 +248,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + HOUSEHOLD_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + HOUSEHOLD_TYPE_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + HOUSEHOLD_TYPEE_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + CENSUS_FORM_TABLE_NAME);
         onCreate(db);
     }
 
@@ -305,6 +361,37 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(HOUSEHOLD_TYPEE_NAME, householdTypee.getName());
 
         return db.insert(HOUSEHOLD_TYPEE_TABLE_NAME, null, cv);
+    }
+
+    public long addCensusForm(CensusForm censusForm) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CENSUS_FORM_ID, censusForm.getId());
+        cv.put(CENSUS_FORM_CITIZEN_TIN, censusForm.getCitizen_tin());
+        cv.put(CENSUS_FORM_AGE, censusForm.getAge());
+        cv.put(CENSUS_FORM_NUMBER, censusForm.getNumber());
+        cv.put(CENSUS_FORM_SEX, censusForm.getSex());
+        cv.put(CENSUS_FORM_BIRTH, censusForm.getBirth());
+        cv.put(CENSUS_FORM_OWNER_REL, censusForm.getOwner_rel());
+        cv.put(CENSUS_FORM_CITIZENSHIP, censusForm.getCitizenship());
+        cv.put(CENSUS_FORM_LOCATION, censusForm.getLocation());
+        cv.put(CENSUS_FORM_NATION, censusForm.getNation());
+        cv.put(CENSUS_FORM_LANGUAGE, censusForm.getLanguage());
+        cv.put(CENSUS_FORM_OLANGUAGE, censusForm.getO_language());
+        cv.put(CENSUS_FORM_EDUCATION, censusForm.getEducation());
+        cv.put(CENSUS_FORM_LIVE_PERIOD, censusForm.getLive_period());
+        cv.put(CENSUS_FORM_OLIVE_PERIOD, censusForm.getO_live_period());
+        cv.put(CENSUS_FORM_STATUS, censusForm.getStatus());
+        cv.put(CENSUS_FORM_MARRIAGE_YEAR, censusForm.getMarriage_year());
+        cv.put(CENSUS_FORM_MARRIAGE_SUM, censusForm.getMarriage_sum());
+        cv.put(CENSUS_FORM_JOB_PERIOD, censusForm.getJob_period());
+        cv.put(CENSUS_FORM_JOB_SPHERE, censusForm.getJob_sphere());
+        cv.put(CENSUS_FORM_JOB_LOCATION, censusForm.getJob_location());
+        cv.put(CENSUS_FORM_PARTTIME, censusForm.getParttime());
+        cv.put(CENSUS_FORM_INCOME_SUM_TYPE, censusForm.getIncome_sum_type());
+
+        return db.insert(CENSUS_FORM_TABLE_NAME, null, cv);
     }
 
     public Cursor selectFromTable(String sql) {
