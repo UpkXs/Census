@@ -112,7 +112,7 @@ public class OnlineInterviewLoginPartActivity extends AppCompatActivity {
             toastShow("First part of online interview passed successfully");
             Intent onlineInterviewHouseholdPartActivity = new Intent(OnlineInterviewLoginPartActivity.this, OnlineInterviewHouseholdPartActivity.class);
             onlineInterviewHouseholdPartActivity.putExtra("username", username);
-            onlineInterviewHouseholdPartActivity.putExtra("citizenTIN", Integer.valueOf(citizenTIN));
+            onlineInterviewHouseholdPartActivity.putExtra("citizenTIN", Long.parseLong(citizenTIN));
             onlineInterviewHouseholdPartActivity.putExtra("citizenRegionId", citizenRegionId);
             startActivity(onlineInterviewHouseholdPartActivity);
         }

@@ -2,7 +2,7 @@ package com.example.census.model;
 
 public class Household {
     private int    id;
-    private int    citizen_tin;
+    private long citizen_tin;
     private String address;
     private int    type;
     private int    region;
@@ -54,11 +54,11 @@ public class Household {
         this.id = id;
     }
 
-    public int getCitizen_tin() {
+    public long getCitizen_tin() {
         return citizen_tin;
     }
 
-    public void setCitizen_tin(int citizen_tin) {
+    public void setCitizen_tin(long citizen_tin) {
         this.citizen_tin = citizen_tin;
     }
 

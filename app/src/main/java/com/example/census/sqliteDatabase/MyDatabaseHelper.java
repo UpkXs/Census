@@ -367,7 +367,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(CENSUS_FORM_ID, censusForm.getId());
         cv.put(CENSUS_FORM_CITIZEN_TIN, censusForm.getCitizen_tin());
         cv.put(CENSUS_FORM_AGE, censusForm.getAge());
         cv.put(CENSUS_FORM_NUMBER, censusForm.getNumber());

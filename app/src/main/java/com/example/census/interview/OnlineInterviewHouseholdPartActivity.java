@@ -31,7 +31,7 @@ import java.util.List;
 public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
 
     private String username;
-    private int citizenTIN;
+    private long citizenTIN;
     private int citizenRegionId;
 
     private LinearLayout questionLayout;
@@ -68,7 +68,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             username = (String) extras.get("username");
-            citizenTIN = (int) extras.get("citizenTIN");
+            citizenTIN = (long) extras.get("citizenTIN");
             citizenRegionId = (int) extras.get("citizenRegionId");
 
             System.out.println("pkrONW7K :: username : " + username);
@@ -270,7 +270,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
 
     }
 
-    private void goToTheNextPart(View view, HouseholdType householdType, HouseholdTypee householdTypee) {
+    private void goToTheNextPart(View view, HouseholdType householdType, HouseholdTypee householdTypee) { // todo aro 4HQ72WS7 warning todo aro remove all sout
 
         boolean allEmpty = false;
 
@@ -299,8 +299,6 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
         }
 
         Household household = new Household();
-
-        // todo aro warning todo aro remove all sout
 
         System.out.println("cLN7fCLJ :: " + citizenTIN);
         household.setCitizen_tin(citizenTIN);
@@ -336,13 +334,13 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
         household.setSize(Integer.parseInt(answers.get(householdQuestions.get(6).getId()).getText().toString().trim()));
 
         System.out.println("2nRXCu22 :: " + Integer.parseInt(answers.get(householdQuestions.get(7).getId()).getText().toString().trim()));
-        household.setSize(Integer.parseInt(answers.get(householdQuestions.get(7).getId()).getText().toString().trim()));
+        household.setWo_size(Integer.parseInt(answers.get(householdQuestions.get(7).getId()).getText().toString().trim()));
 
         System.out.println("L4dL22O6 :: " + Integer.parseInt(answers.get(householdQuestions.get(8).getId()).getText().toString().trim()));
-        household.setSize(Integer.parseInt(answers.get(householdQuestions.get(8).getId()).getText().toString().trim()));
+        household.setRoom(Integer.parseInt(answers.get(householdQuestions.get(8).getId()).getText().toString().trim()));
 
         System.out.println("MQCgGuh6 :: " + answers.get(householdQuestions.get(9).getId()).getText().toString().trim());
-        household.setLandscape(answers.get(householdQuestions.get(9).getId()).getText().toString().trim());
+        household.setOwner(answers.get(householdQuestions.get(9).getId()).getText().toString().trim());
 
         myDB.addHousehold(household);
         myDB.addHouseholdType(householdType);
@@ -350,6 +348,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
 
         Intent onlineInterviewCensusFormActivity = new Intent(OnlineInterviewHouseholdPartActivity.this, OnlineInterviewCensusFormActivity.class);
         onlineInterviewCensusFormActivity.putExtra("username", username);
+        onlineInterviewCensusFormActivity.putExtra("citizenTIN", citizenTIN);
         startActivity(onlineInterviewCensusFormActivity);
     }
 
