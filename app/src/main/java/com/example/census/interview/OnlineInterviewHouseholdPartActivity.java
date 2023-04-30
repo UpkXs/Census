@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.example.census.R;
 import com.example.census.enums.AnswerType;
-import com.example.census.enums.Role;
 import com.example.census.model.Household;
 import com.example.census.model.HouseholdType;
 import com.example.census.model.HouseholdTypee;
@@ -41,7 +40,6 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
 
     private TextView questionId;
     private TextView questionName;
-    private EditText questionAnswer;
 
     private Button btnGoToTheNextPart;
 
@@ -86,6 +84,8 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
         // Get a reference to the parent layout
         LinearLayout parentLayout = findViewById(R.id.parentLayout);
 
+        View checkboxView = LayoutInflater.from(this).inflate(R.layout.activity_checkbox_houshold_type, null);
+
         // Iterate through the questions and inflate the layout for each one
         for (Question question : householdQuestions) {
             // Inflate the layout
@@ -96,8 +96,9 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
             questionBody = findViewById(R.id.questionBody);
 
             if (question.getId() == 2) {
-                System.out.println("6C41v9Bo :: " + question.getQuestion());
-                return;
+                System.out.println("6C41v9Bo :: question.getId() == 2 : question.getQuestion() = " + question.getQuestion());
+                questionsLayout.addView(checkboxView);
+                continue;
             }
 
             // Set the question ID and name
@@ -122,32 +123,32 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
             answers.put(question.getId(), questionAnswer);
         }
 
-        parentLayout.addView(questionsLayout); // todo aro why is not adding to the end
+        parentLayout.addView(questionsLayout);
 
 
-        CheckBox checkbox1 = (CheckBox) findViewById(R.id.checkbox1);
-        CheckBox checkbox21 = (CheckBox) findViewById(R.id.checkbox21);
-        CheckBox checkbox22 = (CheckBox) findViewById(R.id.checkbox22);
-        CheckBox checkbox3 = (CheckBox) findViewById(R.id.checkbox3);
-        CheckBox checkbox4 = (CheckBox) findViewById(R.id.checkbox4);
-        CheckBox checkbox5 = (CheckBox) findViewById(R.id.checkbox5);
+        CheckBox checkbox1 = (CheckBox) checkboxView.findViewById(R.id.checkbox1);
+        CheckBox checkbox21 = (CheckBox) checkboxView.findViewById(R.id.checkbox21);
+        CheckBox checkbox22 = (CheckBox) checkboxView.findViewById(R.id.checkbox22);
+        CheckBox checkbox3 = (CheckBox) checkboxView.findViewById(R.id.checkbox3);
+        CheckBox checkbox4 = (CheckBox) checkboxView.findViewById(R.id.checkbox4);
+        CheckBox checkbox5 = (CheckBox) checkboxView.findViewById(R.id.checkbox5);
 
-        TextView questionId1 = findViewById(R.id.questionId1);
-        TextView questionId2 = findViewById(R.id.questionId2);
-        TextView questionId21 = findViewById(R.id.questionId21);
-        TextView questionId22 = findViewById(R.id.questionId22);
-        TextView questionId3 = findViewById(R.id.questionId3);
-        TextView questionId4 = findViewById(R.id.questionId4);
-        TextView questionId5 = findViewById(R.id.questionId5);
+        TextView questionId1 = checkboxView.findViewById(R.id.questionId1);
+        TextView questionId2 = checkboxView.findViewById(R.id.questionId2);
+        TextView questionId21 = checkboxView.findViewById(R.id.questionId21);
+        TextView questionId22 = checkboxView.findViewById(R.id.questionId22);
+        TextView questionId3 = checkboxView.findViewById(R.id.questionId3);
+        TextView questionId4 = checkboxView.findViewById(R.id.questionId4);
+        TextView questionId5 = checkboxView.findViewById(R.id.questionId5);
 
 
-        TextView questionName1 = findViewById(R.id.questionName1);
-        TextView questionName2 = findViewById(R.id.questionName2);
-        TextView questionName21 = findViewById(R.id.questionName21);
-        TextView questionName22 = findViewById(R.id.questionName22);
-        TextView questionName3 = findViewById(R.id.questionName3);
-        TextView questionName4 = findViewById(R.id.questionName4);
-        TextView questionName5 = findViewById(R.id.questionName5);
+        TextView questionName1 = checkboxView.findViewById(R.id.questionName1);
+        TextView questionName2 = checkboxView.findViewById(R.id.questionName2);
+        TextView questionName21 = checkboxView.findViewById(R.id.questionName21);
+        TextView questionName22 = checkboxView.findViewById(R.id.questionName22);
+        TextView questionName3 = checkboxView.findViewById(R.id.questionName3);
+        TextView questionName4 = checkboxView.findViewById(R.id.questionName4);
+        TextView questionName5 = checkboxView.findViewById(R.id.questionName5);
 
         HouseholdType householdType = new HouseholdType();
         HouseholdTypee householdTypee = new HouseholdTypee();
@@ -270,18 +271,13 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
     }
 
     private void goToTheNextPart(View view, HouseholdType householdType, HouseholdTypee householdTypee) {
-        for (int i = 1; i < answers.size() + 1; i++) {
-            System.out.println("Z3BSpi0U :: " + answers.get(i));
-            System.out.println("voalAxSD :: " + answers.get(i).getId());
-            System.out.println("PtX5dxx4 :: " + answers.get(i).getText());
-        }
 
-        boolean allEmpty = true;
+        boolean allEmpty = false;
 
         // check if all values are empty
         for (EditText value : answers.values()) {
-            if (!value.getText().toString().isEmpty()) {
-                allEmpty = false;
+            if (value.getText().toString().isEmpty()) {
+                allEmpty = true;
                 break;
             }
         }
@@ -292,7 +288,19 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
             return;
         }
 
+        for (int i = 1; i < answers.size() + 1; i++) {
+            if (i == 2) {
+                System.out.println("9DQ7B8kr :: i == " + 2);
+                continue;
+            }
+            System.out.println("Z3BSpi0U :: " + answers.get(i));
+            System.out.println("voalAxSD :: " + answers.get(i).getId());
+            System.out.println("PtX5dxx4 :: " + answers.get(i).getText());
+        }
+
         Household household = new Household();
+
+        // todo aro warning todo aro remove all sout
 
         System.out.println("cLN7fCLJ :: " + citizenTIN);
         household.setCitizen_tin(citizenTIN);
@@ -300,8 +308,14 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
         System.out.println("KriEOmwu :: " + answers.get(householdQuestions.get(0).getId()).getText().toString().trim());
         household.setAddress(answers.get(householdQuestions.get(0).getId()).getText().toString().trim());
 
-        System.out.println("3Gkq0AtU :: " + householdType.getType()); // todo aro warning todo aro
-        household.setType(householdType.getType()); // todo aro warning todo aro
+        System.out.println("EHQ5LK6K :: " + householdType.getId());
+        System.out.println("EHQ5LK6K :: " + householdType.getName());
+        System.out.println("EHQ5LK6K :: " + householdType.getType());
+        System.out.println("EHQ5LK6K :: " + householdTypee.getId());
+        System.out.println("EHQ5LK6K :: " + householdTypee.getName());
+
+        System.out.println("3Gkq0AtU :: " + householdType.getType());
+        household.setType(householdType.getType());
 
         System.out.println("uQM39wLO :: " + citizenRegionId);
         household.setRegion(citizenRegionId);
