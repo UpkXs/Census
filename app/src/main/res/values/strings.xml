@@ -76,6 +76,8 @@
     <string name="question_head">Question Head</string>
     <string name="individual_identification_number">Individual Identification Number</string>
     <string name="enter_the_answer">enter the answer</string>
+    <string name="online_interview_third_part">Online Interview Third Part</string>
+    <string name="finish_online_interview">Finish online interview</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>
