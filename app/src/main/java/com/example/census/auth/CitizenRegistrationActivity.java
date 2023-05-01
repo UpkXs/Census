@@ -129,14 +129,11 @@ public class CitizenRegistrationActivity extends AppCompatActivity {
         rows = myDB.addCitizen(citizen);
         citizen = getCitizen(citizen.getUsername_id());
 
-//        Intent faceIDActivity = new Intent(this, FaceIDActivity.class);
-//        faceIDActivity.putExtra("role", role);
-//        faceIDActivity.putExtra("action", action);
-//        faceIDActivity.putExtra("username", citizenLogin.getUsername());
-//        startActivity(faceIDActivity);
-        Intent todo = new Intent(getApplicationContext(), OnlineInterviewActivity.class); // todo aro remove
-        todo.putExtra("username", citizenLogin.getUsername());
-        startActivity(todo);
+        Intent faceIDActivity = new Intent(this, FaceIDActivity.class);
+        faceIDActivity.putExtra("role", role);
+        faceIDActivity.putExtra("action", action);
+        faceIDActivity.putExtra("username", citizenLogin.getUsername());
+        startActivity(faceIDActivity);
     }
 
     public void goToLoginActivity(View v) {
