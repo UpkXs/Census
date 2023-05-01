@@ -3,7 +3,7 @@ package com.example.census.modelDAO;
 public class CitizenDAO {
     private String fullName;
     private String username;
-    private int TIN;
+    private long TIN;
 
     public CitizenDAO() {
     }
@@ -30,11 +30,11 @@ public class CitizenDAO {
         this.username = username;
     }
 
-    public int getTIN() {
+    public long getTIN() {
         return TIN;
     }
 
-    public void setTIN(int TIN) {
+    public void setTIN(long TIN) {
         this.TIN = TIN;
     }
 }

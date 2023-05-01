@@ -13,10 +13,7 @@ import android.widget.Toast;
 
 import com.example.census.R;
 import com.example.census.enums.Role;
-import com.example.census.model.Citizen;
-import com.example.census.model.CitizenLogin;
 import com.example.census.modelDAO.CitizenDAO;
-import com.example.census.modelDAO.StationaryDAO;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
 import com.example.census.view.ViewInfoControllerActivity;
 
