@@ -87,7 +87,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 citizenDAO.setFullName(cursor.getString(0));
                 citizenDAO.setUsername(cursor.getString(1));
-                citizenDAO.setTIN(cursor.getInt(2));
+                citizenDAO.setTIN(cursor.getLong(2));
             }
         }
         return citizenDAO;
