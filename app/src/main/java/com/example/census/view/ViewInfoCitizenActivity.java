@@ -87,14 +87,6 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
             return;
         }
 
-        for (int i = 0; i < citizenInfo.size(); i++) {
-            System.out.println("00sU132a :: citizenInfo.get(i) = " + citizenInfo.get(i));
-        }
-
-        for (int i = 0; i < householdInfo.size(); i++) {
-            System.out.println("zA8aUjJ0 :: householdInfo.get(i) = " + householdInfo.get(i));
-        }
-
         // Get a reference to the parent layout
         LinearLayout parentLayout = findViewById(R.id.parentLayout);
 
@@ -169,7 +161,11 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
                 logOut(view);
             }
         });
+    }
 
+    private void logOut(View view) {
+        Intent mainActivity = new Intent(ViewInfoCitizenActivity.this, MainActivity.class);
+        startActivity(mainActivity);
     }
 
     private long getCitizenTinWithUsername(String username, long citizenTIN) {
@@ -217,11 +213,6 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
             }
         }
         return householdFormInfoList;
-    }
-
-    private void logOut(View view) {
-        Intent mainActivity = new Intent(ViewInfoCitizenActivity.this, MainActivity.class);
-        startActivity(mainActivity);
     }
 
     private List<String> getCensusFormByCitizenTIN(long citizenTIN) {

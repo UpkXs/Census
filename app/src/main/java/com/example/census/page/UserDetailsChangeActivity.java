@@ -131,11 +131,6 @@ public class UserDetailsChangeActivity extends AppCompatActivity {
             return;
         }
 
-        for (int i = 0; i < citizenInfoQuestions.size(); i++) {
-            System.out.println("pH4N6905 :: citizenInfoQuestions.get(i).getId() = " + citizenInfoQuestions.get(i).getId());
-            System.out.println("kfL3ek5l :: citizenInfoQuestions.get(i).getQuestion() = " + citizenInfoQuestions.get(i).getQuestion());
-        }
-
         // Get a reference to the parent layout
         LinearLayout parentLayout = findViewById(R.id.parentLayout);
 
@@ -264,12 +259,6 @@ public class UserDetailsChangeActivity extends AppCompatActivity {
             System.out.println("XFQIxeFN :: All values are empty. Please answer to all question.");
             toastShow("All values are empty. Please answer to all question.");
             return;
-        }
-
-        for (int i = 1; i < householdInfoEditedAnswers.size() + 1; i++) { // todo aro remove
-            System.out.println("hQWqUlM2 :: householdInfoEditedAnswers.get(i) = " + householdInfoEditedAnswers.get(i));
-            System.out.println("4zFJUgYC :: householdInfoEditedAnswers.get(i).getId() = " + householdInfoEditedAnswers.get(i).getId());
-            System.out.println("j0oNNz5h :: householdInfoEditedAnswers.get(i).getText() = " + householdInfoEditedAnswers.get(i).getText());
         }
 
         CensusForm censusForm = new CensusForm();
@@ -478,6 +467,4 @@ public class UserDetailsChangeActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
-
-    // todo aro f4f72tr8 implement logic of change citizen info
 }
