@@ -163,9 +163,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
                 checkbox4.setEnabled(!isChecked);
                 checkbox5.setEnabled(!isChecked);
 
-                householdType.setId(1);
                 householdType.setName(questionName1.getText().toString().trim());
-                householdType.setType(0);
             }
         });
 
@@ -179,12 +177,9 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
                 checkbox4.setEnabled(!isChecked);
                 checkbox5.setEnabled(!isChecked);
 
-                householdTypee.setId(1);
                 householdTypee.setName(questionName21.getText().toString().trim());
 
-                householdType.setId(2);
                 householdType.setName(questionName2.getText().toString().trim());
-                householdType.setType(householdTypee.getId());
             }
         });
 
@@ -198,12 +193,9 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
                 checkbox4.setEnabled(!isChecked);
                 checkbox5.setEnabled(!isChecked);
 
-                householdTypee.setId(2);
                 householdTypee.setName(questionName22.getText().toString().trim());
 
-                householdType.setId(2);
                 householdType.setName(questionName2.getText().toString().trim());
-                householdType.setType(householdTypee.getId());
             }
         });
 
@@ -217,9 +209,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
                 checkbox4.setEnabled(!isChecked);
                 checkbox5.setEnabled(!isChecked);
 
-                householdType.setId(3);
                 householdType.setName(questionName3.getText().toString().trim());
-                householdType.setType(0);
             }
         });
 
@@ -233,9 +223,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
                 checkbox3.setEnabled(!isChecked);
                 checkbox5.setEnabled(!isChecked);
 
-                householdType.setId(4);
                 householdType.setName(questionName4.getText().toString().trim());
-                householdType.setType(0);
             }
         });
 
@@ -249,9 +237,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
                 checkbox3.setEnabled(!isChecked);
                 checkbox4.setEnabled(!isChecked);
 
-                householdType.setId(5);
                 householdType.setName(questionName5.getText().toString().trim());
-                householdType.setType(0);
             }
         });
 
@@ -312,9 +298,6 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
         System.out.println("EHQ5LK6K :: " + householdTypee.getId());
         System.out.println("EHQ5LK6K :: " + householdTypee.getName());
 
-        System.out.println("3Gkq0AtU :: " + householdType.getType());
-        household.setType(householdType.getType());
-
         System.out.println("uQM39wLO :: " + citizenRegionId);
         household.setRegion(citizenRegionId);
 
@@ -342,9 +325,16 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
         System.out.println("MQCgGuh6 :: " + answers.get(householdQuestions.get(9).getId()).getText().toString().trim());
         household.setOwner(answers.get(householdQuestions.get(9).getId()).getText().toString().trim());
 
-        myDB.addHousehold(household);
-        myDB.addHouseholdType(householdType);
-        myDB.addHouseholdTypee(householdTypee);
+        long householdTypeeId = myDB.addHouseholdTypee(householdTypee); // insert into HouseholdTypee table and get new inserted record ID
+        System.out.println("S2MiNA2O :: householdTypeeId = " + householdTypeeId);
+
+        householdType.setType((int) householdTypeeId);
+        long householdTypeId = myDB.addHouseholdType(householdType); // insert into HouseholdType table and get new inserted record ID
+        System.out.println("9tZJL2Ie :: householdTypeId = " + householdTypeId);
+
+        household.setType((int) householdTypeId);
+
+        myDB.addHousehold(household); // insert into Household table new record
 
         Intent onlineInterviewCensusFormActivity = new Intent(OnlineInterviewHouseholdPartActivity.this, OnlineInterviewCensusFormActivity.class);
         onlineInterviewCensusFormActivity.putExtra("username", username);
