@@ -83,6 +83,7 @@
     <string name="household_info">Household Info</string>
     <string name="citizen_information_change_page">Citizen Information Change Page</string>
     <string name="update_and_go_to_stationary_view_page">Update and Go To Stationary View Page</string>
+    <string name="go_to_view_info_stationary_page">Go To View Info Stationary Page</string>
 
     <color name="main_color">#FFFFFF</color>
     <color name="second_main_color">#4CAF50</color>

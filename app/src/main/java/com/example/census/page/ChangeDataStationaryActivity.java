@@ -17,6 +17,7 @@ import com.example.census.adapter.UserListAdapter;
 import com.example.census.enums.Action;
 import com.example.census.enums.Role;
 import com.example.census.sqliteDatabase.MyDatabaseHelper;
+import com.example.census.view.ViewInfoStationaryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ChangeDataStationaryActivity extends AppCompatActivity {
     private Role   role;
     private String username;
 
-    private Button btnLogOut;
+    private Button btnViewInfoStationaryActivity;
 
     private MyDatabaseHelper myDB;
 
@@ -47,13 +48,15 @@ public class ChangeDataStationaryActivity extends AppCompatActivity {
 
         TextView noOnePassed = findViewById(R.id.noOnePassed);
 
-        btnLogOut = findViewById(R.id.btnLogOut);
+        btnViewInfoStationaryActivity = findViewById(R.id.btnViewInfoStationaryActivity);
 
-        btnLogOut.setOnClickListener(new View.OnClickListener() { //todo go to view stationary page
+        btnViewInfoStationaryActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainActivity = new Intent(ChangeDataStationaryActivity.this, MainActivity.class);
-                startActivity(mainActivity);
+                Intent viewInfoStationaryActivity = new Intent(getApplicationContext(), ViewInfoStationaryActivity.class);
+                viewInfoStationaryActivity.putExtra("role", role);
+                viewInfoStationaryActivity.putExtra("username", username);
+                startActivity(viewInfoStationaryActivity);
             }
         });
 
