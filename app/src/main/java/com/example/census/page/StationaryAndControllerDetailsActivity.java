@@ -121,7 +121,7 @@ public class StationaryAndControllerDetailsActivity extends AppCompatActivity {
 
         region = regionName;
 
-        regionList = new ArrayList<>();
+        regionList = new ArrayList<>(); // todo aro sf9ieC8G region list contains only user region
 
         getRegions(); // select all regions from database( * table name region)
 
