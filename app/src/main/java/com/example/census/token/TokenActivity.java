@@ -17,7 +17,8 @@ import android.widget.Toast;
 import com.example.census.R;
 import com.example.census.enums.Action;
 import com.example.census.enums.Role;
-import java.util.concurrent.ThreadLocalRandom;
+
+import java.util.Random;
 
 public class TokenActivity extends AppCompatActivity {
 
@@ -54,9 +55,8 @@ public class TokenActivity extends AppCompatActivity {
         }
 
         long seed = System.currentTimeMillis();
-        ThreadLocalRandom random = ThreadLocalRandom.current();
-        random.setSeed(seed);
-        code = random.nextInt(100000, 1000000);
+        Random random = new Random(seed);
+        code = random.nextInt(900000) + 100000;
 
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "myCh")

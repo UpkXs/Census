@@ -25,7 +25,7 @@ import com.example.census.view.ViewInfoCitizenActivity;
 import com.example.census.view.ViewInfoControllerActivity;
 import com.example.census.view.ViewInfoStationaryActivity;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 public class VerifyTokenActivity extends AppCompatActivity {
 
@@ -136,9 +136,8 @@ public class VerifyTokenActivity extends AppCompatActivity {
                 }
 
                 long seed = System.currentTimeMillis();
-                ThreadLocalRandom random = ThreadLocalRandom.current();
-                random.setSeed(seed);
-                code = random.nextInt(100000, 1000000);
+                Random random = new Random(seed);
+                code = random.nextInt(900000) + 100000;
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(VerifyTokenActivity.this, "myCh")
                         .setSmallIcon(android.R.drawable.stat_notify_sync)
