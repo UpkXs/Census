@@ -98,6 +98,12 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
         // Get a reference to the parent layout
         LinearLayout parentLayout = findViewById(R.id.parentLayout);
 
+        btnLogOut = findViewById(R.id.btnLogOut);
+        parentLayout.removeView(btnLogOut);
+
+        txtHouseholdInfo = findViewById(R.id.txtHouseholdInfo);
+        parentLayout.removeView(txtHouseholdInfo);
+
         LinearLayout censusFormLayout = new LinearLayout(this);
         censusFormLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -122,44 +128,39 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
 
         parentLayout.addView(censusFormLayout);
 
-        txtHouseholdInfo = findViewById(R.id.txtHouseholdInfo);
-        parentLayout.removeView(txtHouseholdInfo);
-        parentLayout.addView(txtHouseholdInfo);
-
         householdFormInfo = getHouseholdFormByCitizenTIN(citizenTIN);
 
         if (householdFormInfo.isEmpty()) {
             System.out.println("zh69ctVK :: Household Form Info with citizenTIN = " + citizenTIN + " not found in DB");
             toastShow("Household Form Info with citizenTIN = " + citizenTIN + " not found in DB");
-            return;
+        } else {
+            parentLayout.addView(txtHouseholdInfo);
+
+            LinearLayout householdFormLayout = new LinearLayout(this);
+            householdFormLayout.setOrientation(LinearLayout.VERTICAL);
+
+            // Iterate through the householdInfo and inflate the layout for each one
+            for (int i = 0; i < householdInfo.size(); i++) {
+                // Inflate the layout
+                View householdFormView = LayoutInflater.from(this).inflate(R.layout.activity_citizen_info_layout, null);
+
+                citizenInfoLayout = householdFormView.findViewById(R.id.citizenInfoLayout);
+                fieldLayout = householdFormView.findViewById(R.id.fieldLayout);
+                fieldHeader = householdFormView.findViewById(R.id.fieldHeader);
+                fieldBody = householdFormView.findViewById(R.id.fieldBody);
+
+                System.out.println("9GQS6vp3 :: " + householdInfo.get(i) + " : " + householdFormInfo.get(i));
+
+                fieldHeader.setText(householdInfo.get(i).toString().trim());
+                fieldBody.setText(householdFormInfo.get(i).toString().trim());
+
+                // Add the householdForm view to the parent layout
+                householdFormLayout.addView(householdFormView);
+            }
+
+            parentLayout.addView(householdFormLayout);
         }
 
-        LinearLayout householdFormLayout = new LinearLayout(this);
-        householdFormLayout.setOrientation(LinearLayout.VERTICAL);
-
-        // Iterate through the householdInfo and inflate the layout for each one
-        for (int i = 0; i < householdInfo.size(); i++) {
-            // Inflate the layout
-            View householdFormView = LayoutInflater.from(this).inflate(R.layout.activity_citizen_info_layout, null);
-
-            citizenInfoLayout = householdFormView.findViewById(R.id.citizenInfoLayout);
-            fieldLayout = householdFormView.findViewById(R.id.fieldLayout);
-            fieldHeader = householdFormView.findViewById(R.id.fieldHeader);
-            fieldBody = householdFormView.findViewById(R.id.fieldBody);
-
-            System.out.println("9GQS6vp3 :: " + householdInfo.get(i) + " : " + householdFormInfo.get(i));
-
-            fieldHeader.setText(householdInfo.get(i).toString().trim());
-            fieldBody.setText(householdFormInfo.get(i).toString().trim());
-
-            // Add the householdForm view to the parent layout
-            householdFormLayout.addView(householdFormView);
-        }
-
-        parentLayout.addView(householdFormLayout);
-
-        btnLogOut = findViewById(R.id.btnLogOut);
-        parentLayout.removeView(btnLogOut);
         parentLayout.addView(btnLogOut);
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
