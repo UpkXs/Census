@@ -12,7 +12,7 @@ import com.example.census.MainActivity;
 import com.example.census.R;
 import com.example.census.enums.Role;
 
-public class SelectActivity extends AppCompatActivity {
+public class SelectActivity extends AppCompatActivity { // todo aro remove if this class unused
 
     private Role role;
 
@@ -39,7 +39,7 @@ public class SelectActivity extends AppCompatActivity {
         btnViewUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SelectActivity.this, "Selected: View User Info", Toast.LENGTH_SHORT).show(); // todo
+                Toast.makeText(SelectActivity.this, "Selected: View User Info", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -47,9 +47,9 @@ public class SelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (role.label.equals("Stationary") || role.label.equals("Controller")) {
-                    Toast.makeText(SelectActivity.this, "Selected: Change User Data", Toast.LENGTH_SHORT).show(); // todo
+                    Toast.makeText(SelectActivity.this, "Selected: Change User Data", Toast.LENGTH_SHORT).show();
                 } else if (role.label.equals("Citizen")) {
-                    Toast.makeText(SelectActivity.this, "Selected: Online Interview", Toast.LENGTH_SHORT).show(); // todo
+                    Toast.makeText(SelectActivity.this, "Selected: Online Interview", Toast.LENGTH_SHORT).show();
                 }
             }
         });

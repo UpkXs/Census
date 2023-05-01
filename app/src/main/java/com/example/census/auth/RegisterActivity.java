@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         checkboxStationary = (CheckBox) findViewById(R.id.checkboxStationary);
         checkboxController = (CheckBox) findViewById(R.id.checkboxController);
 
-        String registerPage = Role.ADMIN.label + " Registration Page"; // todo
+        String registerPage = Role.ADMIN.label + " Registration Page";
         TextView textView = findViewById(R.id.roleId);
         textView.setText(registerPage);
 

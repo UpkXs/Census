@@ -27,7 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private             Context context;
     private static final String  DATABASE_NAME    = "Census.db";
-    private static final int     DATABASE_VERSION = 5; // todo increment (only!!! when you need clear database)
+    private static final int     DATABASE_VERSION = 5; // todo aro increment (only!!! when you need clear database)
 
     //region Stationary table
     private static final String STATIONARY_TABLE_NAME = "stationary";

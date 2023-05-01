@@ -256,7 +256,7 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
 
     }
 
-    private void goToTheNextPart(View view, HouseholdType householdType, HouseholdTypee householdTypee) { // todo aro 4HQ72WS7 warning todo aro remove all sout
+    private void goToTheNextPart(View view, HouseholdType householdType, HouseholdTypee householdTypee) {
 
         boolean allEmpty = false;
 
@@ -286,43 +286,16 @@ public class OnlineInterviewHouseholdPartActivity extends AppCompatActivity {
 
         Household household = new Household();
 
-        System.out.println("cLN7fCLJ :: " + citizenTIN);
         household.setCitizen_tin(citizenTIN);
-
-        System.out.println("KriEOmwu :: " + answers.get(householdQuestions.get(0).getId()).getText().toString().trim());
         household.setAddress(answers.get(householdQuestions.get(0).getId()).getText().toString().trim());
-
-        System.out.println("EHQ5LK6K :: " + householdType.getId());
-        System.out.println("EHQ5LK6K :: " + householdType.getName());
-        System.out.println("EHQ5LK6K :: " + householdType.getType());
-        System.out.println("EHQ5LK6K :: " + householdTypee.getId());
-        System.out.println("EHQ5LK6K :: " + householdTypee.getName());
-
-        System.out.println("uQM39wLO :: " + citizenRegionId);
         household.setRegion(citizenRegionId);
-
-        System.out.println("24QOozir :: " + Integer.parseInt(answers.get(householdQuestions.get(2).getId()).getText().toString().trim()));
         household.setYear(Integer.parseInt(answers.get(householdQuestions.get(2).getId()).getText().toString().trim()));
-
-        System.out.println("Jsy68baU :: " + Integer.parseInt(answers.get(householdQuestions.get(3).getId()).getText().toString().trim()));
         household.setFloor(Integer.parseInt(answers.get(householdQuestions.get(3).getId()).getText().toString().trim()));
-
-        System.out.println("1tp38p9A :: " + answers.get(householdQuestions.get(4).getId()).getText().toString().trim());
         household.setMaterial(answers.get(householdQuestions.get(4).getId()).getText().toString().trim());
-
-        System.out.println("4xqIwl31 :: " + answers.get(householdQuestions.get(5).getId()).getText().toString().trim());
         household.setLandscape(answers.get(householdQuestions.get(5).getId()).getText().toString().trim());
-
-        System.out.println("5u753EWo :: " + Integer.parseInt(answers.get(householdQuestions.get(6).getId()).getText().toString().trim()));
         household.setSize(Integer.parseInt(answers.get(householdQuestions.get(6).getId()).getText().toString().trim()));
-
-        System.out.println("2nRXCu22 :: " + Integer.parseInt(answers.get(householdQuestions.get(7).getId()).getText().toString().trim()));
         household.setWo_size(Integer.parseInt(answers.get(householdQuestions.get(7).getId()).getText().toString().trim()));
-
-        System.out.println("L4dL22O6 :: " + Integer.parseInt(answers.get(householdQuestions.get(8).getId()).getText().toString().trim()));
         household.setRoom(Integer.parseInt(answers.get(householdQuestions.get(8).getId()).getText().toString().trim()));
-
-        System.out.println("MQCgGuh6 :: " + answers.get(householdQuestions.get(9).getId()).getText().toString().trim());
         household.setOwner(answers.get(householdQuestions.get(9).getId()).getText().toString().trim());
 
         long householdTypeeId = myDB.addHouseholdTypee(householdTypee); // insert into HouseholdTypee table and get new inserted record ID

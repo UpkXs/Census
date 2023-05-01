@@ -138,7 +138,7 @@ public class OnlineInterviewCensusFormActivity extends AppCompatActivity {
         });
     }
 
-    private void finishOnlineInterview(View view) { // todo aro YN74bXXS warning todo aro remove all sout
+    private void finishOnlineInterview(View view) {
 
         boolean allEmpty = false;
 
@@ -164,70 +164,27 @@ public class OnlineInterviewCensusFormActivity extends AppCompatActivity {
 
         CensusForm censusForm = new CensusForm();
 
-        System.out.println("pm53PGu1 :: citizenTIN : " + citizenTIN);
         censusForm.setCitizen_tin(citizenTIN);
-
-        System.out.println("ThEQ242g :: age : " + Integer.parseInt(answers.get(censusFormQuestions.get(0).getId()).getText().toString().trim()));
         censusForm.setAge(Integer.parseInt(answers.get(censusFormQuestions.get(0).getId()).getText().toString().trim()));
-
-        System.out.println("8Ld8PxsM :: number : " + Long.parseLong(answers.get(censusFormQuestions.get(1).getId()).getText().toString().trim()));
         censusForm.setNumber(Long.parseLong(answers.get(censusFormQuestions.get(1).getId()).getText().toString().trim()));
-
-        System.out.println("uf4aY93V :: sex : " + answers.get(censusFormQuestions.get(2).getId()).getText().toString().trim());
         censusForm.setSex(answers.get(censusFormQuestions.get(2).getId()).getText().toString().trim());
-
-        System.out.println("jnK4TBcz :: birth : " + answers.get(censusFormQuestions.get(3).getId()).getText().toString().trim() );
         censusForm.setBirth(answers.get(censusFormQuestions.get(3).getId()).getText().toString().trim());
-
-        System.out.println("KxXEG3Qo :: owner_rel : " + answers.get(censusFormQuestions.get(4).getId()).getText().toString().trim());
         censusForm.setOwner_rel(answers.get(censusFormQuestions.get(4).getId()).getText().toString().trim());
-
-        System.out.println("7NXO3mdu :: citizenship : " + answers.get(censusFormQuestions.get(5).getId()).getText().toString().trim());
         censusForm.setCitizenship(answers.get(censusFormQuestions.get(5).getId()).getText().toString().trim());
-
-        System.out.println("2Fb9Pxm9 :: location : " + answers.get(censusFormQuestions.get(6).getId()).getText().toString().trim());
         censusForm.setLocation(answers.get(censusFormQuestions.get(6).getId()).getText().toString().trim());
-
-        System.out.println("W5zb4GxX :: nation : " + answers.get(censusFormQuestions.get(7).getId()).getText().toString().trim());
         censusForm.setNation(answers.get(censusFormQuestions.get(7).getId()).getText().toString().trim());
-
-        System.out.println("J4k6sf9c :: language : " + answers.get(censusFormQuestions.get(8).getId()).getText().toString().trim());
         censusForm.setLanguage(answers.get(censusFormQuestions.get(8).getId()).getText().toString().trim());
-
-        System.out.println("6B16IwIX :: o_language : " + answers.get(censusFormQuestions.get(9).getId()).getText().toString().trim());
         censusForm.setO_language(answers.get(censusFormQuestions.get(9).getId()).getText().toString().trim());
-
-        System.out.println("8L3EWjmD :: education : " + answers.get(censusFormQuestions.get(10).getId()).getText().toString().trim());
         censusForm.setEducation(answers.get(censusFormQuestions.get(10).getId()).getText().toString().trim());
-
-        System.out.println("yMh328q8 :: live_period : " + Integer.parseInt(answers.get(censusFormQuestions.get(11).getId()).getText().toString().trim()));
         censusForm.setLive_period(Integer.parseInt(answers.get(censusFormQuestions.get(11).getId()).getText().toString().trim()));
-
-        System.out.println("GD5n6750 :: o_live_period : " + Integer.parseInt(answers.get(censusFormQuestions.get(12).getId()).getText().toString().trim()));
         censusForm.setO_live_period(Integer.parseInt(answers.get(censusFormQuestions.get(12).getId()).getText().toString().trim()));
-
-        System.out.println("2ukzD8ro :: status : " + answers.get(censusFormQuestions.get(13).getId()).getText().toString().trim());
         censusForm.setStatus(answers.get(censusFormQuestions.get(13).getId()).getText().toString().trim());
-
-        System.out.println("1Q2L120E :: marriage_year : " + Integer.parseInt(answers.get(censusFormQuestions.get(14).getId()).getText().toString().trim()));
         censusForm.setMarriage_year(Integer.parseInt(answers.get(censusFormQuestions.get(14).getId()).getText().toString().trim()));
-
-        System.out.println("4B6RjrGl :: marriage_sum : " + Integer.parseInt(answers.get(censusFormQuestions.get(15).getId()).getText().toString().trim()));
         censusForm.setMarriage_sum(Integer.parseInt(answers.get(censusFormQuestions.get(15).getId()).getText().toString().trim()));
-
-        System.out.println("K6U430v8 :: job_period : " + Integer.parseInt(answers.get(censusFormQuestions.get(16).getId()).getText().toString().trim()));
         censusForm.setJob_period(Integer.parseInt(answers.get(censusFormQuestions.get(16).getId()).getText().toString().trim()));
-
-        System.out.println("pfoO89fP :: job_sphere : " + answers.get(censusFormQuestions.get(17).getId()).getText().toString().trim());
         censusForm.setJob_sphere(answers.get(censusFormQuestions.get(17).getId()).getText().toString().trim());
-
-        System.out.println("3I9d45hC :: job_location : " + answers.get(censusFormQuestions.get(18).getId()).getText().toString().trim());
         censusForm.setJob_location(answers.get(censusFormQuestions.get(18).getId()).getText().toString().trim());
-
-        System.out.println("MLoU84A8 :: parttime : " + answers.get(censusFormQuestions.get(19).getId()).getText().toString().trim());
         censusForm.setParttime(answers.get(censusFormQuestions.get(19).getId()).getText().toString().trim());
-
-        System.out.println("78Ql293v :: income_sum_type : " + answers.get(censusFormQuestions.get(20).getId()).getText().toString().trim());
         censusForm.setIncome_sum_type(answers.get(censusFormQuestions.get(20).getId()).getText().toString().trim());
 
         myDB.addCensusForm(censusForm);

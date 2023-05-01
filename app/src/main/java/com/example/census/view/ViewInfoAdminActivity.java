@@ -52,7 +52,7 @@ public class ViewInfoAdminActivity extends AppCompatActivity {
         btnChangeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToChangeDataActivity(view); // todo
+                goToChangeDataActivity(view);
             }
         });
 
