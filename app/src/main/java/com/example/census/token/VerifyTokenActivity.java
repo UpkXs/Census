@@ -125,7 +125,7 @@ public class VerifyTokenActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.textResendCode).setOnClickListener(new View.OnClickListener() { // todo clear edit text inputs
+        findViewById(R.id.textResendCode).setOnClickListener(new View.OnClickListener() { // todo aro clear edit text inputs
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -135,7 +135,10 @@ public class VerifyTokenActivity extends AppCompatActivity {
                     manager.createNotificationChannel(channel);
                 }
 
-                code = ThreadLocalRandom.current().nextInt(100000, 1000000); // get code(6 digit code) // todo aro thread security
+                long seed = System.currentTimeMillis();
+                ThreadLocalRandom random = ThreadLocalRandom.current();
+                random.setSeed(seed);
+                code = random.nextInt(100000, 1000000);
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(VerifyTokenActivity.this, "myCh")
                         .setSmallIcon(android.R.drawable.stat_notify_sync)

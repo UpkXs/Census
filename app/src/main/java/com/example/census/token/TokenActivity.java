@@ -53,7 +53,11 @@ public class TokenActivity extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
 
-        code = ThreadLocalRandom.current().nextInt(100000, 1000000); // todo aro thread security
+        long seed = System.currentTimeMillis();
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        random.setSeed(seed);
+        code = random.nextInt(100000, 1000000);
+
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "myCh")
                 .setSmallIcon(android.R.drawable.stat_notify_sync)
