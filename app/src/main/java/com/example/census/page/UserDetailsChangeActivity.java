@@ -27,4 +27,6 @@ public class UserDetailsChangeActivity extends AppCompatActivity {
         System.out.println("d0AQzNR4 :: role : " + role);
         System.out.println("38X1i5fa :: username " + username);
     }
+
+    // todo aro f4f72tr8 implement logic of change citizen info
 }

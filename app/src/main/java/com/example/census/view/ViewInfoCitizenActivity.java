@@ -30,4 +30,7 @@ public class ViewInfoCitizenActivity extends AppCompatActivity {
             System.out.println("22p97FpC :: username : " + username);
         }
     }
+
+    // todo aro 5RO2IT3y implement logic of view yourself info citizen
+
 }
