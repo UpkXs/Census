@@ -437,4 +437,62 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         return db.update(CITIZEN_TABLE_NAME, cv, "username_id=?", new String[]{String.valueOf(usernameId)});
     }
+
+    public long updateCitizenTIN(int usernameId, long citizenTIN) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CITIZEN_TIN, citizenTIN);
+
+        return db.update(CITIZEN_TABLE_NAME, cv, "username_id=?", new String[]{String.valueOf(usernameId)});
+    }
+
+    public long updateCensusForm(CensusForm censusForm) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CENSUS_FORM_CITIZEN_TIN, censusForm.getCitizen_tin());
+        cv.put(CENSUS_FORM_AGE, censusForm.getAge());
+        cv.put(CENSUS_FORM_NUMBER, censusForm.getNumber());
+        cv.put(CENSUS_FORM_SEX, censusForm.getSex());
+        cv.put(CENSUS_FORM_BIRTH, censusForm.getBirth());
+        cv.put(CENSUS_FORM_OWNER_REL, censusForm.getOwner_rel());
+        cv.put(CENSUS_FORM_CITIZENSHIP, censusForm.getCitizenship());
+        cv.put(CENSUS_FORM_LOCATION, censusForm.getLocation());
+        cv.put(CENSUS_FORM_NATION, censusForm.getNation());
+        cv.put(CENSUS_FORM_LANGUAGE, censusForm.getLanguage());
+        cv.put(CENSUS_FORM_OLANGUAGE, censusForm.getO_language());
+        cv.put(CENSUS_FORM_EDUCATION, censusForm.getEducation());
+        cv.put(CENSUS_FORM_LIVE_PERIOD, censusForm.getLive_period());
+        cv.put(CENSUS_FORM_OLIVE_PERIOD, censusForm.getO_live_period());
+        cv.put(CENSUS_FORM_STATUS, censusForm.getStatus());
+        cv.put(CENSUS_FORM_MARRIAGE_YEAR, censusForm.getMarriage_year());
+        cv.put(CENSUS_FORM_MARRIAGE_SUM, censusForm.getMarriage_sum());
+        cv.put(CENSUS_FORM_JOB_PERIOD, censusForm.getJob_period());
+        cv.put(CENSUS_FORM_JOB_SPHERE, censusForm.getJob_sphere());
+        cv.put(CENSUS_FORM_JOB_LOCATION, censusForm.getJob_location());
+        cv.put(CENSUS_FORM_PARTTIME, censusForm.getParttime());
+        cv.put(CENSUS_FORM_INCOME_SUM_TYPE, censusForm.getIncome_sum_type());
+
+        return db.update(CENSUS_FORM_TABLE_NAME, cv, "_id=?", new String[]{String.valueOf(censusForm.getId())});
+    }
+
+    public long updateHousehold(Household household) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(HOUSEHOLD_CITIZEN_TIN, household.getCitizen_tin());
+        cv.put(HOUSEHOLD_ADDRESS, household.getAddress());
+        cv.put(HOUSEHOLD_TYPE, household.getType());
+        cv.put(HOUSEHOLD_YEAR, household.getYear());
+        cv.put(HOUSEHOLD_FLOOR, household.getFloor());
+        cv.put(HOUSEHOLD_MATERIAL, household.getMaterial());
+        cv.put(HOUSEHOLD_LANDSCAPE, household.getLandscape());
+        cv.put(HOUSEHOLD_SIZE, household.getSize());
+        cv.put(HOUSEHOLD_WO_SIZE, household.getWo_size());
+        cv.put(HOUSEHOLD_ROOM, household.getRoom());
+        cv.put(HOUSEHOLD_OWNER, household.getOwner());
+
+        return db.update(HOUSEHOLD_TABLE_NAME, cv, "_id=?", new String[]{String.valueOf(household.getId())});
+    }
 }
