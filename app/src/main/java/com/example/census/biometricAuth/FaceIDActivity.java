@@ -110,9 +110,10 @@ public class FaceIDActivity extends AppCompatActivity {
 
         try {
             BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                    .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG | BiometricManager.Authenticators.DEVICE_CREDENTIAL)
-                    .setTitle("Finger Touch")
-                    .setDescription("Use your fingerprint to pass verification")
+                    .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                    .setTitle("Face ID")
+                    .setDescription("Use your faceID to pass verification")
+                    .setNegativeButtonText("Cancel")
                     .build();
 
             login_btn.setOnClickListener(new View.OnClickListener() {

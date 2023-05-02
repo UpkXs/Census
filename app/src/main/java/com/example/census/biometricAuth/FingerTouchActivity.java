@@ -110,8 +110,10 @@ public class FingerTouchActivity extends AppCompatActivity {
 
         try {
             BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                    .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
                     .setTitle("Finger Touch")
                     .setDescription("Use your fingerprint to pass verification")
+                    .setNegativeButtonText("Cancel")
                     .build();
 
             login_btn.setOnClickListener(new View.OnClickListener() {
