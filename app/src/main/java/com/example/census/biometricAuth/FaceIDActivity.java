@@ -114,6 +114,7 @@ public class FaceIDActivity extends AppCompatActivity {
                     .setTitle("Face ID")
                     .setDescription("Use your faceID to pass verification")
                     .setNegativeButtonText("Cancel")
+                    .setConfirmationRequired(true)
                     .build();
 
             login_btn.setOnClickListener(new View.OnClickListener() {
